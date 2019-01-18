@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+<input type="button" id="btn" value="click" onclick="javascript:ajaxFun('https://uzer.me/eaas/workspace/eyJzZXNzaW9uSWQiOjMwNDc4NzM4NzA4NjU0MDgsImNvcnJlbGF0ZWRTZXNzaW9uSWQiOiIwMTViNjcxYS1jMGVlLTRjOWYtOTgyOS1hOTUxZmZlNGU5YTkiLCJnd0hvc3QiOiJ1emVyLm1lIiwiZ3dQb3J0IjoxMjMyMCwibWN1VXJsIjoiaHR0cHM6Ly9tY3UyLnV6ZXIubWU6ODA4MCIsInJlYWRPbmx5IjpmYWxzZSwiY2xpZW50SWQiOiJ1emVyLm1lIiwic2Vzc2lvbk1nclVybCI6Imh0dHBzOi8vdXplci5tZS9lYWFzLXNlc3Npb25tZ3J2MyIsImNsaWVudFRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmxlSEFpT2pFMU5EZ3dNemM0TVRnc0luVnpaWEpmYm1GdFpTSTZiblZzYkN3aWMyTnZjR1VpT2xzaVUwTlBVRVZmUVV4TUlsMHNJbXAwYVNJNkltRXpPRGMyTldVeUxUVmlZVEF0TkdOaE1TMWhNR05qTFdKaU56UTBObUV6TW1JMFlpSXNJbU5zYVdWdWRGOXBaQ0k2SW5WNlpYSXViV1VpTENKMFpYTjBTazFVVUdGNVRHOWhaQ0k2SW5CaGVVeHZZV1JVWlhOMEluMC5MYmNOQW50NG1hbmZnVU93TEFjQkZJX2RHMWVXQXhDMTdwMEZqUjBfTjlUclZXX1pGVk81dkdXdmRmTDEyeWxFc2oxR3BINTZMZGx5LWdDXzdzRXlkRFVYZzNNOGM2d05nRklEdVZoX3FzLXJ2T1VxNWFlUDV5emZkQnY0Y3dWLVR4VnpBTmNtZlVBc21xU2pVYmdXTG5yWmJNVjNMQWktSXdHbUVDZTJfbUlqamRKbWtnNDQ4c2FPS1hTZHlyWTZUZXJhNjhPOXJMV2dqZy10bUM1cXpBNldHSmtoaW1ZZTlPMl9VUzFGOWtRSUg3VGtjeElVdmx2WGgzcHdxeXVBTjlMTEozbUlVbmVvR0VxZERLX0VIU0NKYVQzZTBfdDRQUzZJeDNEdHR2VEVDRVl1clduRjZRNkFrZ2FQcGo2OWFiMkw5MDdLV3lBVXl2RVJGQjdDcnciLCJ1c2VySWQiOjMwNDc4NzI0OTE4NjYxMTIsInVzZXJUb2tlbiI6IjFiOTlkNjViLWJiOTEtNDAzNC1hYzA3LWU2ZGQ1NjlmNmE4MCIsInVzZXJOaWNrbmFtZSI6IuW5vOeomuiwg%2BearueahOS7sumVv%2Be7nyIsInRpbWVvdXQiOjAsImlzUGFydGljaXBhbnRNb2RlIjpmYWxzZSwidGl0bGVOYW1lIjoiTm90ZXBhZCAtIGEudHh0In0')">
+<textarea name="txt" id="txt" cols="30" rows="10"></textarea>
+</body>
+<script>
+
+    function ajaxFun(request_url){
+        var xmlHTTP=null;
+        try{
+            xmlHTTP=new XMLHttpRequest();
+        }catch (e){
+            try{
+                xmlHTTPr=new ActiveXObject("Microsoft.XMLHTTP");
+            }catch (e){
+                console.log("您的浏览器不支持ajax");
+                return false;
+            }
+        }
+        if(xmlHTTP){
+            xmlHTTP.open('get',request_url,true);
+            xmlHTTP.onreadystatechange=function(){
+                if(xmlHTTP.readyState==4){
+                    if(xmlHTTP.status==200){
+                        document.getElementById('txt').innerHTML=xmlHTTP.responseText;
+                    }
+                }
+            }
+            xmlHTTP.send(null);
+        }else{
+            alert('error');
+        }
+
+    }
+</script>
+</html>
