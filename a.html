@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div{
+min-width:300px;
+max-width:600px;
+background-color:red;
+height:60px;
+margin:0 auto;
+}
+</style>
+</head>
+<body>
+<div>a</div>
+</body>
+<script>
+var ua = navigator.userAgent.toLowerCase();
+if (/mobile|android|iphone|ipad|phone/i.test(ua)) {
+   window.location.href = "http://m.baidu.com";
+}
+
+if(/micromessenger/i.test(ua)){
+    window.location.href = "http://m.jd.com";
+}
+</script>
+</html>
