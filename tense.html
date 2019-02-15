@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<style>
+    table {
+        border-collapse: collapse;
+        display:flex;
+    }
+     
+    table, tr, td {
+        border: 1px solid black;
+    }
+    i {
+        font-style:normal;
+    }
+     
+    td {
+        text-align: center;
+        height: 50px; /*这里需要自己调整，根据自己的需求调整高度*/
+        position: relative;
+    }
+    td[class=first]{
+        width: 100px;
+    }
+    td[class=first]:before {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 114px;
+        top: 0;
+        left: 0;
+        background-color: #000;
+        display: block;
+        transform: rotate(-63deg);
+        transform-origin: top;
+        -ms-transform: rotate(-45deg);
+        -ms-transform-origin: top;
+    }
+    .title1{
+        position: absolute;
+        top: 3px;
+        right:10px;
+    }
+    .title2{
+        position: absolute;
+        top: 24px;
+        left:10px;
+    }
+    td>span{
+        display: block;
+    
+        width:100%;
+        line-height:3em;
+        font-weight: 500;
+        position: absolute;
+        top:0;
+        
+    }
+    .words{
+        display: block;
+        margin-top:40px;
+        padding:5px 0;
+    }
+    .words>i{
+        display:inline-block;
+    }
+    .blue{
+        color:blue;
+    }
+    .green{
+        color:green;
+    }
+    .purple{
+        color:purple;
+    }
+    .status{
+        color:rgb(216, 81, 182);
+    }
+    .title{
+        color:crimson;
+    }
+    h3{
+        font-weight: 500;
+        text-align: center;
+        letter-spacing: 10px;
+        color:mediumvioletred;
+    }
+    </style>
+
+</head>
+<body>
+    <h3>英语的16种时态</h3>
+<table>
+    <tr>
+        <td class="first"><i class="title1 title">时间</i><br><i class="title2 status">状态</i></td>
+        <td class="title">现在</td>
+        <td class="title">过去</td>
+        <td class="title">将来</td>
+        <td class="title">过去将来</td>
+    </tr>
+    <tr>
+        <td class="status">一般</td>
+        <td><span class="blue">一般现在时</span><div class="words"><i>do</i><br><i>does</i></div></td>
+        <td><span class="blue">一般过去时</span><div class="words"><i>did</i></div></td>
+        <td><span class="blue">一般将来时</span><div class="words"><i>will do</i></div></td>
+        <td><span class="blue">过去将来时</span><div class="words"><i>would do</i></div></td>
+    </tr>
+    <tr>
+        <td class="status">进行</td>
+        <td><span class="blue">现在进行时</span><div class="words"><i>be doing</i></div></td>
+        <td><span class="blue">过去进行时</span><div class="words"><i>were doing</i><br><i>was doing</i></div></td>
+        <td><span class="green">将来进行时</span><div class="words"><i>will be doing</i></div></td>
+        <td><span  class="purple">过去将来进行时</span><br><i>would be doing</i></div></td>
+    </tr>
+    <tr>
+        <td class="status">完成</td>
+        <td><span class="blue">现在完成时</span><div class="words"><i>have done</i><br><i>has done</i></div></td>
+        <td><span class="blue">过去完成时</span><div class="words"><i>had done</i></div></td>
+        <td><span class="purple">将来完成时</span><div class="words"><i>will have done</i></div></td>
+        <td><span class="purple">过去将来完成时</span><div class="words"><i>would have done</i></div></td>
+    </tr>
+    <tr>
+        <td class="status">完成进行</td>
+        <td><span class="green">现在完成进行时</span><div class="words"><i>have been doing</i></div></td>
+        <td><span class="purple">过去完成进行时</span><div class="words"><i>had been doing</i></div></td>
+        <td><span class="purple">将来完成进行时</span><div class="words"><i>will have been doing</i><br><i>shall have been doing</i></div></td>
+        <td><span class="purple">过去将来完成进行时</span><div class="words"><i>would have been doing</i></div></td>
+    </tr>
+</table>
+<div class="blue">蓝色字体是8种最常用的时态</div> 
+<div class="green">绿色字体是比较常用的时态</div>
+<div class="purple">紫色字体为不常用的时态</div>
+</body>
+</html>
