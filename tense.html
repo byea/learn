@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
 
 <style>
     table {
         border-collapse: collapse;
+        font-size: 12px;
     }
      
     table, tr, td {
@@ -26,7 +28,7 @@
     td[class=first]{
         width: 100px;
     }
-    td[class=first]:before {
+    /* td[class=first]:before {
         content: "";
         position: absolute;
         width: 1px;
@@ -39,7 +41,7 @@
         transform-origin: top;
         -ms-transform: rotate(-45deg);
         -ms-transform-origin: top;
-    }
+    } */
     .title1{
         position: absolute;
         top: 3px;
@@ -51,18 +53,17 @@
         left:10px;
     }
     td>span{
-        display: block;
-    
+        display: block;    
         width:100%;
-        line-height:3em;
+        line-height:2em;
         font-weight: 500;
         position: absolute;
         top:0;
         
     }
     .words{
-        display: block;
-        margin-top:40px;
+        display: inline-block;
+        margin-top:20px;
         padding:5px 0;
     }
     .words>i{
@@ -114,7 +115,7 @@
         <td><span class="blue">现在进行时</span><div class="words"><i>be doing</i></div></td>
         <td><span class="blue">过去进行时</span><div class="words"><i>were doing</i><br><i>was doing</i></div></td>
         <td><span class="green">将来进行时</span><div class="words"><i>will be doing</i></div></td>
-        <td><span  class="purple">过去将来进行时</span><br><i>would be doing</i></div></td>
+        <td><span  class="purple">过去将来进行时</span><div class="words"><i>would be doing</i></div></td>
     </tr>
     <tr>
         <td class="status">完成</td>
