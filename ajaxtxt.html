@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+
+<input type="button" id="btn" value="click" onclick="javascript:ajaxFun('./a.txt')" />
+<textarea name="txt" id="txt" cols="30" rows="10"></textarea>
+</body>
+<script>
+
+    function ajaxFun(request_url){
+        var xmlHTTP=null;
+        try{
+            xmlHTTP=new XMLHttpRequest();
+        }catch (e){
+            try{
+                xmlHTTPr=new ActiveXObject("Microsoft.XMLHTTP");
+            }catch (e){
+                console.log("您的浏览器不支持ajax");
+                return false;
+            }
+        }
+        if(xmlHTTP){
+            xmlHTTP.open('get',request_url,true);
+            xmlHTTP.onreadystatechange=function(){
+                if(xmlHTTP.readyState==4){
+                    if(xmlHTTP.status==200){
+                        document.getElementById('txt').innerHTML=xmlHTTP.responseText;
+                    }
+                }
+            }
+            xmlHTTP.send(null);
+        }else{
+            alert('error');
+        }
+
+    }
+</script>
+</html>
