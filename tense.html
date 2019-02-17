@@ -8,25 +8,39 @@
     <title>Document</title>
 
 <style>
+    html,body,ul,ol{
+        margin:0;
+        padding:0;
+
+    }
     table {
         border-collapse: collapse;
         font-size: 12px;
+        border:1px red solid;
+        min-width: 300px;
+        max-width: 900px; 
+        width:100%;       
     }
      
-    table, tr, td {
+     tr, td {
         border: 1px solid black;
     }
     i {
         font-style:normal;
     }
-     
+    table tr{
+        min-width:300px;
+        max-width:1000px;
+        width:100%;
+        
+    }
     td {
         text-align: center;
-        height: 50px; /*这里需要自己调整，根据自己的需求调整高度*/
+        height: 46px; /*这里需要自己调整，根据自己的需求调整高度*/
         position: relative;
     }
     td[class=first]{
-        width: 80px;
+        flex: 8;
     }
     /* td[class=first]:before {
         content: "";
@@ -44,13 +58,13 @@
     } */
     .title1{
         position: absolute;
-        top: 3px;
-        right:5px;
+        top: 2px;
+        right:2px;
     }
     .title2{
         position: absolute;
-        top: 24px;
-        left:5px;
+        top: 30px;
+        left:2px;
     }
     td>span{
         display: block;    
@@ -59,11 +73,12 @@
         font-weight: 500;
         position: absolute;
         top:0;
+        height:18px;
         
     }
     .words{
         display: inline-block;
-        margin-top:20px;
+        margin-top:16px;
         padding:5px 0;
     }
     .words>i{
@@ -98,10 +113,10 @@
 <table>
     <tr>
         <td class="first"><i class="title1 title">时间</i><br><i class="title2 status">状态</i></td>
-        <td class="title" style="width:120px;">现在</td>
-        <td class="title" style="width:130px;">过去</td>
-        <td class="title" style="width:175px;">将来</td>
-        <td class="title" style="width:170px;">过去将来</td>
+        <td class="title" style="flex:12;">现在</td>
+        <td class="title" style="flex:13;">过去</td>
+        <td class="title" style="flex:17.5;">将来</td>
+        <td class="title" style="flex:17;">过去将来</td>
     </tr>
     <tr>
         <td class="status">一般</td>
