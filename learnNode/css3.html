@@ -1,0 +1,416 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+<pre> 
+CSS3
+第一章css样式单与选择器
+一、caa样式单的基本使用
+  - 链接外部样式文件     &lt;link type="text/css" rel="stylesheet" href="css/a.css"&gt;
+  - 导入外部样式文件      
+  - 使用内部样式定义     &lt;head&gt;&lt;style&gt;定义的样式&lt;/style&gt;&lt;/head&gt;
+  - 使用内联样式          元素里定义。只对单个标签有效可以精确控制
+
+二、css选择器
+1、元素选择器
+      E{...}    // a{color:green;}
+2、属性选择器
+  - E[attr]{...}             对具有attr属性的E元属起作用
+  - E[arrt=value]{...}       对具有attr属性且attr值为value的E元素起作用
+  - E[attr~=value]{...}      对具有attr属性且attr值为以空格格开的系列值，某个值为value的E元素起作用
+  - E[attr|=value]{...}      对具有attr属性且attr值为以连字符格开的系列值，某个值为value的E元素起作用
+  - E[attr^="value"]{...}    对具有attr属性且attr值以value开头的字符串的E元素起作用
+  - E[attr$="value"]{...}    对具有attr属性且attr值以value结尾的字符串的E元素起作用
+  - E[attr*="value"]{...}    对具有attr属性且attr值包含value的字符串的E元素起作用性 
+  &lt;--以上选择器匹配越严格优先级就越高--&gt;
+3、ID选择器
+  #idValue{...}
+4、class选择器
+  E.classValue{...}    //对类名为classValue的E元素起作用。E可省略
+5、包含选择器
+  div a{...}   在div内的a标签。   a标签只要在div内部就行
+6、子选择器
+  div&gt;a{...}   a标签在div内，且是div的子元素。
+7、兄弟选择器
+  div~.aa      div标签后的类名为aa的兄弟元素
+8、选择组合器
+  div,a,#abc{...}    //样式对div,a标签和id="abc"的元素都起作用
+三、伪元素选择器
+  - :first-letter    对指定对象的第一个字符起作用。&lt;--仅对block元素起作用--&gt;
+  - :first-line      对指定对象的第一行内容起作用
+  - :before          与内容相关属性结合使用，在指定元素后添加内容
+  - :after           与内容相关属性结合使用，在指定元素前插入内容
+//p:first-letter{color:#00f;font-size:40pt;font-weight:bold;}
+1、内容相关的属性
+  - content 该属性值可以是字符串、url(url)、attr(alt)、counter(name)、counter(name,list-style-type)、
+open-quote、close-quote等格式。用于向指定元素前或后插入指定内容。
+  - quote   该属性值是两个以空格分隔的字符串，前面是open-quote后面是close-quote
+  - counter-increment  用于定义一个计数器。
+  - counter-reset      复位指定计数器
+//div&gt;div:before{content:'name:';color:blue;background-color:gray;}
+2、插入图像
+//div&gt;div:after{content:url("a.gif");}
+3、只插入部分内容
+//div&gt;div.left:after{content:url("buy.gif");}  //向div的子div元素且类名为left素后添加一图片
+4、配合quote属性执行插入
+//div&gt;div{quotes:"&lt;&lt;" "&gt;&gt;";} div&gt;div:before{content:open-quote;} div&gt;div:after{content:close-quite;}
+5、配合counter-increment属性添加编号
+//div&gt;div{counter-increment:mycounter;} div&gt;div:before{content:counter(mycounter)'.';font-size:20px;}
+6、使用自定义编号
+  - decimal  阿拉伯数字（默认值）
+  - disc     空心圆
+  - circle   实心圆
+  - square   实心方块
+  - lower-alpha 小写英文字字母
+  - upper-alpha 大写英文字字母
+  - lower-greek 基本的希腊小写字母
+  - none     不使用项目符号
+//div&gt;div{counter-increment:mycounter;}div&gt;div:before{content:'第'counter(mycounter,lower-greek)'本';
+font-size:20px;}
+7、添加多级编号
+//div&gt;h2{counter-increment:hcounter;counter-reset:subcounter;} div&gt;div{counter-increment:subcounter;}
+
+五、css3.0新增的伪类选择器
+1、结构性伪类选择器
+  - Selector:root          匹配文档的根元素
+  - Selector:first-child        Selector中父类的第一个子节点元素
+  - Selector:last-child         Selector中父类的最后一个子节点元素
+  - Selector:nth-child(n)       Selector中父类的第n个子节点元素
+  - Selector:nth-last-child(n)  Selector中父类的倒数第n个子节点元素
+  - Selector:only-child         Selector中父类的唯一子节点元素
+  - Selector:first-of-type      Selector中与它同类同级的第一个兄弟元素
+  - Selector:last-of-type       Selector中与它同类同级的最后一个兄弟元素
+  - Selector:nth-of-type(n)     Selector中与它同类同级的第n个兄弟元素
+  - Selector:nth-last-of-type(n) Selector中与它同类同级的倒数第n个兄弟元素
+  - Selector:nth-only-of-type   Selector中与它同类同级的唯一的兄弟元素
+  - Selector:empty              Selector中没有子元素的元素
+
+  --Selector:nth-child(odd/event)       Selector中父素的第奇/偶数个子节点的元素
+  --Selector:nth-last-child(odd/event)  Selector中父素的倒数第奇/偶数个子节点的元素
+  --Selector:nth-child(xn+y)  Selector中父素的第xn+y子节点的元素
+  --Selector:nth-last-child(xn+y)  Selector中父素的倒数第xn+y子节点的元素
+
+  --Selector:nth-of-type(odd/event)       Selector中父素的第奇/偶数个子节点的元素
+  --Selector:nth-last-of-type(odd/event)  Selector中父素的倒数第奇/偶数个子节点的元素
+  --Selector:nth-of-type(xn+y)            Selector中父素的第xn+y子节点的元素
+  --Selector:nth-last-of-type(xn+y)       Selector中父素的倒数第xn+y子节点的元素
+2、UI元素状态伪类选择器
+  - Selector:link       Selector中未被访问前的元素（通常是超链接）
+  - Selector:visited    Selector中已被访问过的元素（通常是超链接）
+  - Selector:active     Selector中被用户激活状态的元素（点击或释放）
+  - Selector:hover      Selector中鼠标悬停状态的元素
+  - Selector:focus      Selector中得到焦点的元素
+  - Selector:enabled    Selector中当前处于可用状态的元素
+  - Selector:disabled   Selector中当前处于不可用状态的元素
+  - Selector:checked    Selector中处于选中状态的元素
+  - Selector:default    Selector中页面打开时处于选中状态的元素
+  - Selector:read-only  Selector中只读状态的元素
+  - Selector:read-write Selector中读写状态的元素
+  - Selector::selectoin  Selector中当前被选中的元素
+3、浏览器专属的属性
+ -ms-      IE
+ -moz-     Firefox
+ -o-       Opera
+ -webkit-  Chrome、Safari
+4、:not和:target
+  - Selector:target           Selector中命名锚点目标的元素且是正在使用
+  - Selector1:not(Selector2)  符合Selector1但不符合Selector2的元素
+六、在脚本中修改显示样式
+（1）获取需要设置CSS样式的元素。可用getElementById()方法
+（2）修改目标的CSS样式
+  ①修改内联CSS属性值：          "obj.style.属性名=属性值"的javascript代码即可
+  ②修改HTML元素的class属性值：  "obj.className=class 选择器"的javascript代码即可
+//document.body.style.backgroundColor="#"+bgColor;    ///bgColor是一个六位数
+//document.getElementById("left").className="top-left";
+  
+第二章 字体与文本相关属性
+一、字体相关属性
+  - font          复合属性:style variant weight size line-height family的复合属性（不建议使用）
+  - color               字体颜色
+  - font-family         字体  可以多个属性以,隔开，优先找前面的字体
+  - font-size           字体大小
+  - font-size-adjust    对不同字体尺寸微调
+  - font-stretch        改变文字的横向拉伸。有三种值：narrower、normal、wider
+  - font-style          设置字体风格，是否斜体等。normal、italic(斜体)、oblique(倾斜字体)
+  - font-weight         设置字体是否加粗。lighter、normal、bold、bloder等或用100、200...900
+  - text-decoration     控制文字是否有修饰线。有none、blink、underline、line-through、overline
+  - font-variant        设置文字的大写字母格式。normal、small-caps(小型的大写字母)
+  - text-shadow         设置文字是否有阴影
+  - line-height         设置字体的行高
+  - letter-spacing      设置字符之间的间隔
+  - word-spacing        设置单词之间的间隔
+1、添加阴影
+  - color            阴影颜色
+  - xoffset          阴影横向的偏移
+  - yoffset          阴影纵向的偏移
+  - radius           阴影模糊半径
+  --text-shadow:color xoffset yoffset length
+  --text-shadow:xoffset yoffset radius color
+2、添加多个阴影
+ - 多组阴影使用逗号隔开
+3、使用font-size-adjust微调字体大小
+ - font-size-adjust:0.52;    0.52是一种字体的高度除以字体的大小
+二、css3支持的颜色表示方法
+  - white、green、greenyellow     用颜色名表示
+  - #000000、#000                 用三位或六位十六进制
+  - rgb(12,255,60)                红、绿、蓝
+  - hsl(120,100%,100%)            色调、饱和度、亮度
+  - rgba(50,122,255,0.3)          红、绿、蓝、透明度
+  - hsla(120,100%,100%,0.6)       色调、饱和度、亮度、透明度
+三、文本相关属性
+  - text-indent        段落文本缩进
+  - text-overflow      控制溢出文本的处理方法
+   &gt;--clip              如果设置了overflow:hidden，当溢出文本是只裁剪溢出文本
+   &gt;--ellipsis          如果设置了overflow:hidden，当溢出文本是裁剪溢出文本并显示...
+  - vertical-aglin     目标元素垂直对齐方式
+   &gt;--auto              自动对齐
+   &gt;--baseline          默认值。文本内容与基线对齐
+   &gt;--sub               文本内容与下标对齐
+   &gt;--super             文本内容与上标对齐
+   &gt;--top               文本内容与元素顶端对齐
+   &gt;--middle            文本内容对齐到元素中间
+   &gt;--bottom            文本内容与元素底端对齐
+   &gt;--length            文本内容相对于基地的偏移距离
+  - text-align          文本水平对齐方式。letf、right、center、justify(两端对齐)
+  - direction           文本流入的方向。ltr、rtl
+  - word-break          文本内容换行方式。
+   &gt;--noraml、keep-all  在空格和连字符换行 
+   &gt;--break-all         允许单词中间换行  Firefox和Opera可能不支持
+  - word-wrap           文本内容换行方式。normal默认、break-word允许单词中间换行
+
+四、新增服务器文字
+1、使用服务器文字
+@font-face{font-family:name;src:url(url) format(TrueType/OpenType);font-weight:block;...}
+2、优先使用客户端字体
+@font-face{font-family:name;src:local("font-name"),url(url) format("TrueType");}
+
+第三章背景、边框和补丁
+一、背景相关属性
+  - background             背景的复合属性
+  - background-color       背景色。如果设置了背景图片会覆盖背景色
+  - background-image       背景图片
+  - background-attachment  背景图片是否滚动。scroll默认滚动、fixed固定
+  - background-position    背景图片的位置。长度或百分比，只定义一个值就是横坐标，纵50%
+  - backgorund-repeat      背景图片是否平铺。no-repeat、repeat-x、repeat-y、repeat
+1、css3新增背景相关属性
+  - background-clip        背景的覆盖范围
+   &gt;-- border-box          背景覆盖border、padding、content
+   &gt;-- no-clip             背景覆盖border、padding、content
+   &gt;-- padding-box         背景覆盖padding、content
+   &gt;-- content-box         背景覆盖content
+  - background-origin      背景覆盖的起点。与background-position类似
+  - background-size        背景图片大小。长度、百分比、auto（保持纵横比，宽或高指定一个）
+2、css3新增多背景图片 
+  - background-image:url(1.jpg),url(2.jpg),url(3.jpg);   //1在最上面，3在最下面
+  - background-repeat:repeat-x,repeat-y,repeat;
+
+二、边框相关属性
+  - border           边框的复合属性。粗细、线型、颜色
+  - border-color     边框颜色。一值:上下左右一样,二值：上下、左右,三值：上、左右、下。
+  - border-style     边框样式。同上
+  - border-width     边框线宽。同上
+  - border-top       上边框的粗细、线宽、颜色
+  - border-top-color
+  - border-top-style
+  - border-top-width
+  - border-bottom
+  - border-left
+  - border-right
+  边框样式有如下：
+  &gt;- none 无边框 - hidden 隐藏边框 - dotted 点线边框 - dashed 虚线边框
+  &gt;- solid 实线边框 - double 双线边框 - groove 3D凹槽边框 - ridge 3D凸槽边框
+  &gt;-reset 3D凹入边框 -outset3D凹出边框 
+1、css3提供的渐变边框
+  - border-top-colors  只有Firefox专属时支持
+2、css3提供的圆角边框
+  - border-radius     指定圆角半径。
+    一个值：4个角，二个值：左上右下、右上左下，三个值：左上、右上左下、右下
+    &gt;-- border-top-left-radius      - border-top-right-radius   
+    &gt;-- border-bottom-left-radius   - border-bottom-right-radius
+三、补丁相关属性
+1、padding相关属性
+  - padding     设置上下左右个四边的内补丁距离。1上下左右，2上下、左右，3上、左右、下。4分别
+  - padding-top/right/bottom/left   设置单边补丁距离
+2、margin相关属性
+  - margin     设置上下左右个四边的内补丁距离。1上下左右，2上下、左右，3上、左右、下。4分别
+  - marpaddingp/right/bottom/left   设置单边补丁距离
+
+第四章 大小、定位、轮廓相关属性
+一、大小相关属性
+  - height       目标对象的高度
+  - max-height   目标对象的最大高度
+  - min-height   目标对象的最小高度(如果有max大会自动转为max)
+  - width        目标对象的宽度
+  - max-width
+  - min-width
+1、css3新增box-sizing属性
+  - content-box    width、height控制元素内容区的宽度和高度
+  - padding-box    width、height控制元素的内容区加padding的高和宽   !!此处部分浏览器不支持
+  - border-box     width、height控制元素的内容区加padding再加border的高和宽
+//&lt;div style="width:300px;height:200px;padding:20px;box-sizing:border-box;border:50px solid #aaa;"&gt;文本内容&lt;/div&gt;
+2、css3新增的resize属性    必须设置了overflow时才可用 
+  - none       不允许拖动改变大小
+  - both       允许拖动改变高度和宽度
+  - horizontal 允许拖动改变宽度
+  - vertical   允许拖动改变高度
+  - inherit    继承父元素的resize属性值。默认情况
+//&lt;div style="border:1px solid #aaa;resize:both;overflow:auto;"&gt;
+
+二、定位相关属性
+  - position   定位方式。absolute时会使元素漂浮于文档流之上，relative时会参照前一个元素进行定位，static
+  - z-index    设置对象漂浮层的层序。position：absolute/relative才可用
+  - top        设置对象相对于最近有定位设置的顶边偏移  
+  - right      设置对象相对于最近有定位设置的顶边偏移
+  - bottom     设置对象相对于最近有定位设置的顶边偏移
+  - left       设置对象相对于最近有定位设置的顶边偏移
+  
+三、轮廓相关属性   轮廓不占文档空间
+  - outline          复合属性。设置目标对象轮廓的颜色、线型、线宽
+  - outline-color    设置目标对象轮廓的颜色
+  - outline-style    设置目标对象轮廓的线型
+  - outline-width    设置目标对象轮廓的线宽
+  - outline-offset   设置目标对象轮廓(与边框)的偏离量
+//&lt;div style="outline:#ddd solid 16px;outline-offset:10px;&gt;文本内容&lt;div&gt;
+
+第五章 盒模型与布局相关属性
+一、布局相关属性
+  - float        控制是否浮动及如何浮动。（display="block")
+  - clear        设置组件的左右是否允许出现浮动现象
+   &gt;-- none      默认值两边都允许出现浮动
+   &gt;-- left      不允许左边出现浮动
+   &gt;-- right     不允许右边出现浮动
+   &gt;-- both      两边都不允许出现浮动
+  - clip         对元素进行裁剪。auto不裁剪，rect(1 2 3 4)在目标上定义一个矩形，目标只有位于该矩形内的区域才会被显示出来
+  - overflow     元素区域不够容纳内容时的显示方式。
+   &gt;-- visible   不裁剪也不添加滚动条。默认值
+   &gt;-- auto      不够容纳时就自动添加滚动条
+   &gt;-- hidden    自动裁剪不够显示的内容
+   &gt;-- scroll    总是显示滚动条
+  - overflow-x   与overflow类似，只控制水平方向的显示方式。内容溢出时出现垂直滚动条
+  - overflow-y   与overflow类似，只控制垂直方向的显示方式。内容溢出时出现水平滚动条
+  - visibility   对象是否显示。visible/hidden 不显示时也占用空间
+  - display      对象如何显示。
+1、通过float属性实现多栏布局
+2、使用clear属性实现换行
+3、使用clip属性控制裁剪
+  --clip:rect(a b c d);     (a,b)为矩形右上坐标,(d,c)为矩形左下角坐标。某值为auto则不裁那边
+        !!为了便于看到效果：position:absolute;overflow:hidden;
+二、盒模型和display属性
+1、最基本的盒模型
+  - block         默认占据一行，允许设置高度、宽度
+  - inline        不会占据一行，设置高度、宽度也不会起作用
+  - none          不显示，也不占空间
+  - inline-block  不会占据一行，允许设置高度、宽度
+  - inline-table  专为&lt;table&gt;设置的，设置后表格左、右边可以出现其他内容
+2、表格相关的盒模型
+  - table
+  - table-caption
+  - table-row
+  - table-row-group
+  - table-cell
+  - table-column
+  - table-column-group
+  - table-footer-group
+//&lt;div style="display:table;width:400px;&gt;&lt;/div&gt;   这个&lt;div&gt;就可以当成表格标签使用
+3、list-item盒模型
+  将目标元素转换成类似&lt;ul&gt;的列表元素
+  &lt;div display:list-item;list-style-type:square;}
+4、run-in盒模型
+ 如果run-in元素后紧跟一个block盒模型元素，将被放到后面的元素内显示   !!Firefox不支持
+
+三、对盒添加阴影
+1、使用box-shadow属性为盒模型元素整体添加阴影
+  - box-shadow    复合属性有5个值
+  - hOffset       阴影在水平方向上的偏移
+  - vOffset       阴影在垂直方向上的偏移
+  - blurLength    阴影的模糊程度
+  - scaleLength   阴影的缩放程度
+  - color         阴影的颜色
+&lt;div style="box-shadow:10px 8px 20px 15px red;&gt;
+2、对表格及单元格添加阴影
+  使用bos-shadow也可以为表格、单元格添加阴影
+&lt;td style="box-shadow:6px 6px 4px #555;"&gt;
+
+四、CSS3的多栏布局
+1、css3新增的分栏功能
+div#content{column-count:2;-moz-column-count:2;-o-column-count:2;-webkit-column-count:2}
+  - columns              复合属性。栏目的宽度、数量
+  - column-width         栏目的宽度
+  - column-count         栏目数
+  - column-rule          复合属性。指定分隔条的宽度、样式、颜色
+  - column-rule-width    分隔条的宽度
+  - column-rule-style    要隔条的线型。与边框样式相同
+  - column-rule-color    分隔条颜色
+  - column-gap           各栏目之间的间距
+  - column-fill          栏目的高度。auto:随内容自动变化；balance:栏目高度统和最高的那一栏高
+2、使用盒模型实现多栏布局
+  - box        {display:box;display:-moz-box;display:-webkit-box;}
+  - box-orient          盒模型里子元素的排列方向。horizontal:水平;vertical:垂直。
+  - box-ordinal-group   盒模型里子元素的显示顺序。数字小靠前
+  - box-flex            盒模型里子元素自适应宽度比例。（如果有多余的宽度按比例分配给子元素）
+
+第六章 表格、列表相关属性及media query
+1、表格相关属性
+  - border-collapse     单元格边框显示方式。collapse(边框合并)和seperate(边框分开)
+  - border-spacing      单元格边框之间的间距。上一个为seperate时可以设置
+  - caption-side        设置标题位于表格哪边。和&lt;caption&gt;一起使用，top、bottom、left、right
+  - empty-cells         单元格没有内容时，是否显示边框。为seperate时可以设置show、hidden
+  - table-layout        表格宽度布局的方法。auto、fixed
+2、列表相关属性
+  - list-style             复合属性。list-style-image、list-style-position、list-style-type
+  - list-style-image       指定列表项标记的图片。会覆盖list-style-type
+  - list-style-position    指定标记出现的位置。outside、inside
+  - list-style-type        指定列表标记的样式。decimal、disc、circle、square...
+3、控制光标的属性
+  通过CSS的cursor属性可以改变光标在目标组件上的形状
+  - all-scroll      十字箭头
+  - col-resize      水平拖动线
+  - crosshair       十字线
+  - move            移动十字箭头
+  - help            问号箭头
+  - no-drop         禁止
+  - not-allowed     禁止
+  - pointer         手型
+  - progress        带沙漏的箭头
+  - row-resize      垂直拖动线
+  - text            文本编辑
+  - vertical-text   垂直文本编辑
+  - wait            沙漏
+  - *-resize        各种方向拖动的光标。w-resize(左)、s(下)、n(上)、e(右)、ne(右上)、sw、se、nw...
+4、media query功能
+   CSS增加media query表达式，可以对媒体进行匹配，不同参数的媒进行精确控制
+@media not|only 设备类型 [and 设备特性]*
+    [and设备特性]可以出现0~N次，通过[and设备特性]可以对多个设备特性进行匹配
+  - width               带单位的长度        匹配浏览器的宽度
+  - height              带单位的长度        匹配浏览器的高度
+  - aspect-ratio        比例值 例:16/9      匹配浏览器的宽、高度比值
+  - device-width        带单位的长度值      匹配分辨率的宽度值
+  - device-height       带单位的长度值      匹配分辨率的高度值
+  - device-aspect-ratio 比例值 例:16/9      匹配分辨率的宽、高度比值
+  - color               整数值              匹配设备使用多少位色深
+  - color-index         整数值              匹配色彩表中的颜色数
+  - monochrome          整数值              匹配单帧缓冲器中每像素位的位数。不是单色设备就为0
+  - resolution          分辨率 如:300dpi    匹配设备的物理分辨率
+  - scan                progressive或interlace   匹配设备的扫描方式 逐行/隔行
+  - grid                0或1                设备是否基于栅格的
+   media query语法格式中的设备类型如下：
+  - all        适用于所有的设备类型
+  - aural      适用于语音和音频合成器
+  - braille    适用于触觉反馈设备
+  - embossed   适用于凸点字符（盲文）印刷设备
+  - handheld   适用于小型或手题设备
+  - print      适用于打印机
+  - projection 适用于投影图像，如幻灯片
+  - screen     适用于计算机显示器
+  - tty        适用于使用固定间距字符格的设备，如电传打字机和终端
+  - tv         适用于电视类设备
+//@media screen and (max-width:480px){样式}   //设置浏览器宽度小于480px时的css样式
+//@media screen and (min-width:1000px){样式}   //设置浏览器宽度大于1000px时的css样式
+
+第七章  变形与动画相关属性
+	 </pre>
+	</body>
+</html>

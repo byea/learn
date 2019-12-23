@@ -1,0 +1,414 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+	<pre> 
+3.4 Http 请求　 
+   HTTP请求格式
+      - 请求行（request Line） 请求方法(method)、请求网址Request-URI和协议(Protocol)构成
+      - 请求头 包括多个属性，也叫请求报文
+      - 数据体 附加在请求之后的文本或二进制文件　　　
+  ServletRequest 接口API
+  定义：public interface ServletRequest 
+      - public Object getAttribute(String name)     返回指定属性的值。不存在就返回空值
+      - public Enumeration getAttributeNames();     返回包含在这个请求中的所有属性名的列表
+      - public void setAttribute(String name,Object object);   在请求中添加一个属性
+      - public String getParameter(String name)       以String返回指定参数的值。不存在返回空值      
+      - public Enumeration getParameterNames()         获取请求里所有参数
+      - public String[] getParameterValues(String name);  //通过数组返回一个name的多项 value
+      - public String getCharacterEncoding();    返回前台传来的编码类型
+      - public int getContentLength();      请求内容的长度，未知就是-1 (get请求是-1)
+  usename=sd&age=12&course=html&course=js
+      - public String getContentType()      返回请求数据体的MIME类型，如未知返回空值
+      - public ServeletInputStream getInputStream()throws IOException; 得到请求的输入流（上传文件）
+      - public BufferedReader getReader() throws IOException;   得到请求输入字符流
+
+ 3.4.3 HttpServletRequest接口API
+   定义：public interface HttpServletRequest extends ServletRequest
+      - public Cookie[] getCookies();     得到请求当中的所有Cookie
+      - public long getDateHeader(String name)   返回指定头域的值。自1970-1-1以来精确到毫秒的值
+      - public String getHeader(String name)     返回一个请求头域的值。
+      - public Enumeration getHeaderNames()    返回String对象的列表
+      - public int getIntHeader(String name)   返回指定头域的值
+      - public String getMethod()      返回请求方法类型GET/POST
+      - public String getRequestedSessionId()   返回请求相应的sessionId
+      - public String getRequestURI()  返回HTTP请求的URl定义资源部分
+      - public String getServletPath()  返回请求servlet路径
+      - public HttpSession getSession()  返回请求关联的session
+      - public boolean isRequestedSessionIdValid() 检查session是否有效
+3.5HTTP响应
+   3.5.1响应格式
+      Http响应也是三部分组成：状态行、头信息、响应内容。 
+      - HTTP/1.1 200 OK
+      - Head 头信息
+      - Content(HTML代码） 响应内容
+      状态行200表示状态码，状态码由三位数字组成表示请求处理的结果
+         -- 1xx 表示临时响应并需要请求者继续执行操作
+         -- 2xx 表示成功处理了请求
+         -- 3xx 要完成请求，需要进一步操作。通常这些代码用来看重定向
+         -- 4xx 表示请求可能出错，妨碍了服务器的处理
+         -- 5xx 表示服务器在处理请求时发生内部错误。这些错误可以是服务器本身的错误，而不是请求出错
+             OK 表示状态描述，只是一个文本的描述。
+3.5.2 ServletResponse 接口 API
+  定义：public interface ServletResponse
+   
+  - public SetvletOutputStream getOutputStream()throws IOException; 返回一个记录二进制数据的输出流（下载）
+  - public PrintWriter getWriter() throws IOException;返回一个PrintWriter对象用来记录格式化的响应实体（传文字）
+  - public void setContentLength(int length);  设置响应的内容的长度
+  - public void setContentType(String type);    设定响应的content类型(默认是text/html)
+
+3.5.3  HttpServletResponse接口 API
+ 定义：public interface HttpServletResponse extends ServletResponse
+
+  - public void addCookie(Cookie cookie);   在响应中增加一个指定的cookie
+  - public boolean containsHeader(String name);  检查是否设置了指定的响应头
+  - public String encodeRedirectURL(String url);  设置响应URL编码方式
+  - public void sendError(int statusCode)throws IOException;
+    public void sendError(int statusCode,String message)throws IOException;  发送错误信息
+  - public void sendRedirect(String location)throws IOException;   重定向到一个页面
+  - public void setDateHeader(String name,long date);    设置头信息
+  - public void setHeader(String name,String value);     设置头信息
+  - public void setIntHeader(String name,int value);     设置头信息
+
+3.6 HttpServlet
+  3.6.1 GenericServlet抽象类API
+   定义：public abstract class GenericServlet implements Servlet,servletConfig,Serializable;
+   此类提供一个简单方案，使得编写Servlet更加方便。
+   - public void init()throws ServletException;
+     public void init(ServletConfig config)throws ServletException;   初始化Servlet
+   - public abstract void service(ServletRequest request,ServletResponse response)throws ServletException,IOException;    分发doGet()、doPost()完成，在HttpServlet中有实现
+   - public void destroy();     Servlet销毁调用
+   - public String getInitParameter(String name);    得到初始化的参数 
+   - public Enumeration getInitParameterNames();     得到初始化参数的所有名字
+   - public ServletConfig getServletConfig();        得到Servlet配置信息，也可以拿到初始化信息
+   - public SerletContext getServletContext();       同一个webapp共用一个servlet
+   - public String getServletInfo();                 得到Servlet版本的String
+   - public void log(String msg);
+     public void log(String msg,Throwable cause);    通过Servlet content对象将Servlet的类名和给定信息写入log中
+
+3.6.2 HttpServlet类 API
+  定义： public class HttpServlet extends GeneriServlet implements Serializable
+  - protected void service(HttpServletRequest request,HttpServletResponse response)throws ServletExcepiton,IOExceptin;   实现了service方法
+    public void service(ServletRequest request,ServletResponse response)throws ServletException,IOException;
+  - protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException;     被这个类的service()调用，处理一个HTTP GET操作
+  - protected void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException;     被这个类的service()调用，处理一个HTTP POST操作
+  - protected void doPut(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException;     被这个类的service()调用，处理一个HTTP PUT操作
+  - doTrace
+  - doDelete
+  - doHead
+  - doOptions
+  - protected long getLastModified(HttpServletRequest request); 反映请求实体的最后修改时间
+3.6.3构建自己的Servlet类
+   通过扩展HttpServlet类，并覆盖doGet()和doPost()来构建自己的HttpServlet
+   public class MyServlet extends HttpServlet{
+       public void doGet(HttpServletRequest request,HttpServletResponse response)throws IOExcepion{}
+4、使用HTML Form的Servlet
+  4.1 HTML Form
+    FORM标签
+    - ACTOIN   指定form信息的目的地（URL）
+    - METHOD   指定HTTP方法（GET or POST)
+  &lt;form action='servlet=URL' method='GET'&gt;
+    ..... &lt;/form&gt;
+  4.2 HTML Form 组件
+  4.3 GET与POST的选择
+    HTTP GET 方法用于：
+     - 请求对服务器没有负面影响  （请求数据不会修改服务器的数据）
+     - Form 数据量小
+     - 数据的内容应在URL中可以，明文传输，安全度低
+    HTTP POST 方法用于：
+     - 请求的处理过程改变服务器的状态，如在数据库中存储数据
+     - Form 数据量大
+     - 数据的内容应在URL中不可见，安全度高
+
+5、Servlet 生命周期
+   5.1 Servlet生命周期概述
+       指servlet实例在web容器中从：首次创建调用init()开始初始化期，经过service运行期 ，一直到destory()销毁期。
+       结束servlet的生命周期由web容器来管理
+
+6.2 ServletContext API
+   定义：public interface ServletContext   定义一个Servlet的环境对象。
+   - 只读访问上下文初始化参数
+   - 读写访问应用级属性
+   - 只读访问应用级文件资源
+   - 写访问应用级日志文件
+    - public Object getAttribute(String name);        返回Servlet环境中指定属性的对象
+    - public Enumeration getAttributeNames();          返回Servlet环境中可以属性的列表
+    - public String getInitParameter(String name);     返回指定名字的ServletContext的初始化参数
+    - public void setAttribute(String name,Object o)   给Servlet环境指定对象一个名称
+    - public void removedAttribute(String name)        从Servlet环境中删除一个属性
+    - public ServletContext getContext(String uripath)  返回一个Servlet环境对象
+
+8.1 JSP概述
+  JSP允许在HTML页面中包含Java代码
+  JSP技术的目标是支持表现和业务逻辑的分离
+ 
+8.2 JSP页面的处理过程
+  第一步：请求进入Web容器，如果第一次访问JSP页面，JSP Parser将JSP页面翻译成Servlet代码：如果不是第一次执行第四步
+  第二步：编译Servlet代码，并将编译过的类文件装入Web容器(JVM)环境
+  第三步：Web容器为JSP页面创建一个Servlet类实例，并执行jsInit方法
+  第四步：Web容器为该JSP页面调用Servlet实例的_jspService方法：将结果发送给用户
+
+开发及部署JSP页面
+  - 开发期间将JSP文件放在web目录下
+  - 部署时将其拷贝到如下层次中
+ webapps/
+     project/
+         WEB-INF/
+                web.xml
+                classes/
+                lib/
+         index.html
+         hello.jsp
+
+JSP脚本元素
+   脚本元素&lt;%  %&gt;由JSP引擎处理：所有其它文本、脚本以外的元素均被作为响应的一部分
+    - 注释:         &lt;%--  conment  --%&gt;                  不翻译到Servlet中
+    - 指令标签：    &lt;%@ directive %&gt;                     例：引包&lt;%@ page import="java.util.*" %&gt;
+    - 声明标签：    &lt;%! decl %&gt;                          声明标签允许JSP页面开发人员包含类级声明 例：类属性、类方法、内部类
+    - 脚本标签：    &lt;% code %&gt;                           添加到Sevlet的Service()中的代码
+    - 表达式标签：  &lt;%=expr %&gt;                           输出到前端的数据
+
+8.4 JSP页面中的隐含对象
+  _jspService方法中预定义的变量
+     - request       与请求相关的HttpServletRequest对象
+     - response      与响应相关的HttpServletResponse对象
+     - out           与响应的输出流相关的JspWriter对象
+     - session       与给定用户请求会话相关的HttpSession对象，该变量只在JSP页面参与一个HTTP会话时有意义
+     - application   用于Web应用的ServletContext对象
+     - config        与该JSP页面的servlet相关的Servletconfig对象配置
+     - pageContext   该对象封装了一个JSP页面请求的环境
+     - page          该变量与Java编程语言中的this变量等价
+     - exception     由其它JSP页面抛出的Throwable对象，该变量只在“JSP错误页面”
+8.5 page指令
+  - page指令用于修改JSP页面的整体翻译
+            &lt;%@ page import="java.util.Date" %&gt;
+  - 可以使用多个页面指令，但任一给定属性只能声明一次
+  - 可以将page指令放在JSP文件中的任何地方
+  - page指令定义一组与页面相关的属性，在翻译期间与Web容器通信
+    
+       -- import     定义了一组servlet类定义必须导入的类和包，值是一个由逗号分隔的完全类名或包的列表。
+                    import="java.sql.Date.util.*,java.text.*"
+       -- session    定义JSP页面是否参与HTTP会话，值可以为true(缺省)或false
+       -- buffer     定义用于输出流（JspWriter对象）的缓冲区大小，值可以为none或Nkb,缺省8KB或更大。例：buffer="8kb"
+       -- autoFlush  定义缓冲满时，缓冲输出是否自动完成（flush）或抛出异常。缺省为true。
+       -- isThreadSafe  允许JSP开发人员声明JSP页面是否线程安全
+       -- info       定义一个有前JSP页面的信息串
+       -- errorPage  指明由另一个JSP页面处理所有该JSP页面运行时抛出的异常。例：errorPage="error.jsp"(相对于当前层次) errorPage="/error/formErrors.jsp"(相对于context root)
+       -- isErrorPage  定义JSP页面为其它JSP页面errorPage属性的目标，值为true或false
+       -- contentType  定义输出流的MIME类型，缺省为text/html
+       -- charset      设置字符集
+       -- pageEncoding  定义输出流字符编码，缺省为ISO-8859-1
+&lt;%@ page isErrorPage="true" %&gt;    &lt;%@ page ErrorPage="error.jsp" %&gt;
+
+8.7 调试JSP页面
+   开发JSP页面时的三种基本错误：
+       — 翻译期间（解析错误）
+       — 编译期间（servlet代码中的错误）
+       — 运行期间（逻辑错误）
+9 使用Model 1 架构开发Web应用（JSP+JavaBeans）
+  9.1 使用Model 1架构
+     - Model 1架构使用JSP页面处理Web应用的视图和控制部分
+     - 该架构中不使用Servlet
+     - 例：JSP页面充当form和处理者
+  9.2 JavaBeans组件
+     - JavaBeans组件是一个Java类，特征如下：
+        -- 无public实例变量
+        -- 使用get和set方法定义属性
+        -- 一个无参构造方法
+  9.3 JSP标准动作
+     - JSP页面中使用类似于XML的标符表示运行时的动作
+     - 语法：&lt;jsp:action [ attr=" value"]* /&gt;
+      例：&lt;jsp:useBean id="stu" class="com.chen.Student"/&gt;
+	  &lt;jsp:setProperty name="stu" property="*" /&gt;
+     - 标准动作标签名总以jsp前缀开始
+     - Bean 的四种存在范围
+         -- 页面范围            在一次页面范围中创建，并被存储在PageContext对象中
+         -- 请求范围(request)   在一次服务器请求创建，并被存储在ServletRequest中
+         -- 会话范围(session)   在一次会话范围中创建，并被存储在HttpSession中
+         -- 应用程序范围(application)  在整个web应用范围中，存储在ServletContext对象中
+     - jsp:useBean 动作处理过程
+ 	 jsp:useBean  --&gt;
+	 使用id声明变量 --&gt;
+ 	 试图在指定的范围查找对象 --&gt;
+	 --&gt;[没找到]--&gt;
+	   创建一个类的实例 --&gt;
+	 执行useBean标签初始化对象
+	 --&gt;[找到]--&gt;
+	 将对象转换为指定类型
+     - jsp:forward 动作
+	使用分发器跳转界面&lt;jsp:forward page="guestBookThankYou.jsp" /&gt;
+
+10 使用MVC模式开发Web应用
+  10.1 Web应用的活动
+     - 初始化所有共享数据和资源
+     - 服务每个HTTP请求：
+	 -- 验证 HTML form 数据(如果有)
+	 -- 如果数据验证检查不通过，发送错误页面
+	 -- 处理可存储持久信息的数据
+	 -- 如果处理失败，发送一个错误页面
+	 -- 如果处理成功，发送一个响应页面
+ 10.2 Web 应用的 MVC
+     - MVC是一个框架设计模式
+     - 本身没有实际代码(功能)
+     - 它只是说明页面、数据处理如何摆放
+    * model
+	-  封装应用状态(封装应用数据)
+	-  响应状态查询(对数据进行增删改查)
+	-  暴露应用的功能(暴露接口&lt;public&gt; )
+    * Controller
+	- 验证HTTP请求数据(收集组织数据)
+	- 将用户数据与模型的更新相映射(调用逻辑层)
+	- 选择用于响应的视图(选择下一个界面)
+    * View
+	- 产生HTML响应(展示数据)
+	- 请求模型的更新(人机交互)
+	- 提供HTML form用于用户请求(收集参数，调用逻辑层API)
+    MVC的优点：
+	- 低耦合性：视图层和业务层分离
+	- 高重用性和可适用性
+	- 较低的生命周期成本
+	- 快速的部署
+	- 可维护性
+	- 有利于软件工程化管理
+	- 提高软件的健壮性
+     MVC的缺点
+	- 工作最大，增加工作的复杂性，MVC不适合小型甚至中等规模的应用程序
+
+  10.3 使用 Model 2 架构开发Web应用程序
+     Model 2 架构使用MVC模式，JSP页面充当视图，Servlet充当控制器
+     Model 2 架构开发要求
+	- Servlet 控制器：
+	   * 验证 HTML form 数据
+	   * 调用模型中的业务服务
+	   * 存储请求(或会话)范围内的域对象
+	   * 选择下一个用户的视图
+	- JSP 页面视图：
+	   * 使用用户界面(在HTML中)
+	   * 访问对象
+	- Model
+	  
+      请求分发器
+	* 上下文对象中的分发器：
+	  ServletContext context = getServletContext();
+	  RequestDispatcher servlet = context.getNamedDispatcher("MyServlet");
+	  servlet.forward(request,reaponse);
+	* 请求中的分发器
+	  RequestDispatcher view = request.getRequestDispatcher("tools/nails.jsp");
+	  view.forward(request,response);
+
+ 11 Web应用的并发问题
+   11.1 Servlet 的并发
+      - 多个同类线程运行，可共享同一个Servlet实例
+      - 共享的数据和资源未合理同步，可能引起数据冲突
+     并发管理例：
+      - 将客户数据存储到一个普通文件中
+      - 通过同步文件写出对象，可消除并发问题 sychconized(){}
+   11.2 属性范围
+      1、Web应用中有六种属性范围   是否线程安全
+	- 局部变量(页面范围)       是
+	- 实例变量                
+	- 类变量
+	- 请求属性(请求范围)       是
+	- 会话属性(会话范围)       
+	- 上下文属性(应用范围)     不安全
+   11.3 SingleThreadModel 接口（不建议使用，性能低下）    
+      1、SingleThreadModel特点
+	- 实现SingleThreadModel(STM)接口，某一时刻只有一个请求线程执行service方法
+	- SingleThreadModel接口没有要实现的方法
+	- 可使用STM作为信号通知Web容器Servlet类必须特殊处理
+      2、Web容器实现STM的方法
+ 解决问题  1、尽可能减少同步块和同步方法的使用（不同步整个doGet或doPost方法）
+	   2、使用正确设置了线程安全的资源类
+
+12 Web应用的异常处理
+   12.1 概述
+    12.1.1 HTTP错误
+	一个Http响应可使用400-500范围内的状态代码指明一个服务器错误，常见错误如下：
+	 - 400	Bad Request
+	 - 401  Unauthorized
+	 - 404  Not Found
+	 - 405  Method Not Allowed
+	 - 415  Unsupported Media Type
+	 - 500  Internal Server Error
+	 - 501  Not Implemented
+	 - 503  Service Unavailable
+    12.1.2 Servlet异常
+	Servlet可抛出一个ServletException,指明异常的发生
+    12.2 定制错误页面的方式 
+	- 声明方式 
+		使用部署描述为特定情况(HTTP错误或Java异常)声明错误页面，并由Web容器将处理转发到这些页面	
+	
+	- 编程方式
+		直接在servlet代码中处理Java异常，并将HTTP请求转发到所选定的错误页面
+    12.3 声明HTTP错误页面
+	使用error-page元素声明一个给定的HTTP状态码的处理器：
+	XML中：	&lt;error-page&gt;&lt;error-code&gt;404&lt;/error-code&gt; 
+	              	    &lt;location&gt;/error/404.html&lt;/location&gt;&lt;/error-page&gt;
+	使用exception-type元素声明给定Java异常的处理器(不建议)
+	XML中：	&lt;error-page&gt;&lt;excepton-type&gt;java.lang.ArithmeticException&lt;/exception-type&gt; 
+	                    &lt;location&gt;/error/ExceptionPage&lt;/location&gt;&lt;/error-page&gt;
+    12.4 容器处理异常
+	- 一个servlet可抛出ServletException指明有异常产生
+	- 所有检查到的异常必须被捕获，并封装在ServletException中
+	- 编写错误处理Servlet
+	   -- 应同时覆盖doGet和doPost方法
+	- 两个预定义的请求属性
+	   -- javax.servlet.error.exception:  包含原始(被包装)的异常
+	   -- javax.servlet.error.request_uri: 包含原始客户请求的URI
+    12.5 编程处理异常
+	- 可编写自己的servlet代码捕获所有异常并自己处理，而不是让容器处理
+	- 使用此技术只可以处理Java异常，而非HTTP异常
+	- 步骤：
+	   -- 对可能产生异常的所有代码使用一个try-catch块
+	   -- 在catch块中使用RequestDispatcher将异常转发到一个servlet异常处理器
+	   -- (可选)可以设置特定的请求属性
+
+	- 声明servlet异常处理器，但不提供URl映射
+    12.6 处理方式的选择
+       12.6.1声明方式处理异常的优缺点：容易实现
+	-- 缺点：必须每个异常处理servlet创建URL映射、不能做多对一映射、过于通用
+       12.6.2编程方式处理异常的优缺点
+	-- 优点：使处理器代码处控制器更紧密、使异常处理更明确(显式处理)、处理器可根据环境定制
+	-- 缺点：需要实现更多的代码
+
+13 JSP 重用模板
+   13.1 JSP代码片段的处理
+       在主JSP页面中包含表现代码片段：
+	- include 指令
+	- jsp:include 指令(动态引入) 在生成相应流的时候引用，引入的是html字符串，所以不能共享java变量
+	    * &lt;jsp:include page="common.jsp" /&gt; 不可以共享引入文件的变量
+	    &lt;jsp:include page="{common.jsp|&lt;%=表达式%&gt;}" flush="true|false"&gt;
+	        &lt;jsp:param name="参数名称" value="参数内容"/&gt; 。。。
+	    &lt;/jsp:include&gt;
+	- 使用include 指令(静态引入)
+	    * 目的：将一个代码片段在转换期间(翻译期间)包含在主JSP页面的文本中
+	    * 语法：&lt;%@ include file="fragementURL"%&gt;  翻译成java代码引入，可以共享数据，约等于同一个jsp页面
+		    &lt;%@ page pageEncoding="gbk"%&gt;
+   在WEB中可以使用&lt;jsp:forward&gt;指令，将一个用户的请求(request)，从一个页面传递到另外一个页面
+      页面跳转语法
+	* 不传递参数
+		&lt;jsp:forward page="{要包含的文件路径|&lt;%=表达式%&gt;}" /&gt;
+	* 传递参数
+		&lt;jsp:forward page="{要包含的文件路径|&lt;%=表达式%&gt;}" &gt;
+		     &lt;jsp:param name="参数名称" value="参数内容" /&gt;...
+		&lt;jsp:forward&gt;
+ 14 过滤器
+      Filter技术是servlet 2.3 新增的功能。它使用户可以改变一个request和修改一个response。Filter不是一个servlet,它不能产生一个response，
+它能够在一个request到达servlet之前预处理request，也可以在离开servlet时处理response。一个filter包括：
+	1、在servlet被调用之前截获；
+	2、在servlet被调用之前检查servletrequest；
+	3、根据需要修改request头和request数据；
+	4、根据需要修改response头和response数据；
+	5、在servlet被调用之后截获。
+     可以配置一个filter到一个或多个servlet。
+     常用的filter包括：用户辨认filter、日志filter、审核filter、加密filter、符号filter、改变XML内容的XSLT filter等。
+     一个filter必须实现javax.servlet.Filter接口并定义三个方法：
+	- void setFilterConfig(FilterConfig config)
+	- FilterConfig getFilterConfig()
+	- void doFilter(ServletRequest req,ServletResponse res,FilterChain chain)	
+	</pre>
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+	<pre>                                          JavaScript
+第一章 JavaScripty语法详解
+
+一、导入JavaScripty文件
+  &lt;script src="js/text.js" type="text/javascript"&gt;&lt;/script&gt;
+
+二、数据类型和变量
+1、定义变量的方式 (区分大小写) 
+  - 隐式定义：直接给变量赋值              a=2;
+  - 显式定义：使用var定义变量      var a,b,c=3;
+2、类型转换
+   '-' 系统自动将字符串转换成数值，再进行减法运算
+   '+' 系统自动将数值转换成字符串，再进行连接运算
+强制类型转换函数
+  - toString()     将布尔值、数值等转换成字符串
+  - parseInt()     将字符串、布尔值等转换成整数
+  - parseFloat()   将字符串、布尔值等转换成浮点数
+  -- 如果字符串是数值字符串，可以转换成数值，否则转换成NAN
+  -- undefined、null、及其它对象，一律转换成NaN
+3、变量
+   全局变量、局部变量
+   同名同时存在时，局部变量会覆盖全局变量。局部变量的块级作用域
+
+三、基本数据类型
+  - 数值类型 
+  - 布尔类型
+  - 字符串类型
+  - undefined类型
+  - null类型
+1、数值类型
+// a=3.12  b=5E2 c=1.23e-3 d=0x13  
+Infinity、-Infinity   NaN与NaN不相等
+2、字符串类型
+字符串有以下基本方法和属性操作
+  - String()          构建一个字符串
+  - charAt()          获取字符串特定索引处的字符
+  - charCodeAt()      获取字符串特定索引处的字符所对应的Unicode值
+  - length            属性，返回字符串的长度。中文字算一个字符
+  - toUpperCase()     将字符串所有字母转换成大写字母
+  - toLowerCase()     将字符串所有字母转换成小写字母
+  - fromCharCode()    静态方法，将一系列Unicode值转换成字符串
+  - indexOf()         返回字符串中特定字符第一次出现的位置
+  - lastIndexOf()     返回字符串中特定字符最后次出现的位置
+  - substring()       返回字符串的某个字串
+  - slice()           返回字符串的某个字串，功能比substring()强大，支持负数
+  - match()           使用正则表达式搜索目标子字符串，返回匹配子字符串
+  - search()          使用正则表达式搜索目标子字符串，返回匹配索引值
+  - concat()          将多个字符串拼成一个字符串
+  - split()           将某个字符串分隔成多个字符串，可以指定分隔符
+  - replace()         将字符串的某个子串以特定字符代替
+indexOf(secrchString [,startIndex])   搜索searchString位置，跳过左边startIndex个字符
+lastIndexOf(secrchString [,startIndex])
+substring(start [end])   从start(包括)索引处，截取到end(不包括)索引处
+slice(start [,end])      支持负数，使用负数索引时，表示从字符串右边开始计算索引 最右边-1
+3、布尔类型
+4、undefined和null
+5、正则表达式
+   正则表达式支持的通配符
+  - .    匹配任何字符
+  - \d   匹配0-9的数字  digit
+  - \D   匹配非数字
+  - \s   匹配所有空白字符
+  - \S   匹配所有非空白字符
+  - \w   匹配所有单词字符。0-9和字母_
+  - \W   匹配所有非单词字符
+  - [ ]  表示灵活，[a-z0-9]表示a到z或0-9的任意一个字符 [\u4e00-\u9fff]匹配任意一个汉字
+  - $    匹配一行的结尾
+  - ^    匹配一行的开头 
+   正则表达式的特殊字符
+  - ？    指定前面子表达式可以出现零次或一次
+  - *     指定前面子表达式可以出现零次或多次
+  - +     指定前面子表达式可以出现一次或多次
+  - {m,n} 最少出现m次,最多出现n次.如果都省略就是零到无限次
+//  /^&lt;a href=(\'|\")[a-zA-Z0-9\/:\.}*(\'|\')&gt;.*&lt;\/a&gt;$/.test("&lt;a href='http://www.crazyit.org'&gt;疯狂Java联盟&lt;/a&gt;")
+
+四、复合类型
+  - Object    对象
+  - Array     数组
+  - Function  函数
+1、对象
+JavaScript提供了以下常用的内置类
+  - Array     数组类
+  - Date      日期类
+  - Error     错误类
+  - Function  函数类
+  - Math      数学类
+  - Number    数值类
+  - Object    对象类
+  - String    字符串类
+2、数组
+ 定义数组：
+  - var a=[];
+  - var b=[1,2,true];
+  - var c=new Array();
+  !!!访问数组元素时，不会产生数组越界，访问并未赋值的数组元素时，值为undefined
+3、函数
+   function functionName(param1,param2,...){}
+五、运算符
+1、赋值运算符 =
+var a=3;
+var b=a+4;
+var c=d=f=5;
+2、算术运算符
+  +、-、*、/、++、--、%
+//  var mod=5.3%3.1;   2.1
+3、位运算符
+  - &   按位与        两个都是1才是1
+  - |   按位或        有一个为1就是1
+  - ~   按位非        取反
+  - ^   按位异或      两个不同才是1
+  - &lt;&lt;  左位移运算符
+  - &gt;&gt;  右位移运算符
+  - &gt;&gt;&gt; 无符号右位移运算符
+4、加强的赋值运算符
+  +=、-=、*=、/=、%=、&=、|=、^=、&lt;&lt;=、&gt;&gt;=、&gt;&gt;&gt;=
+5、比较运算符
+  &gt;、&gt;=、&lt;、&lt;=、!=、==、!==(严格不等于)、===(严格等于)   !!!严格时就不支持自动转换
+6、逻辑运算符(有时可以用位运算符代替)
+  &&、||、!
+7、三目运算符
+  (expression)?if-true-statement:if-false-statement;
+8、逗号运算符
+  ,逗号运算符允许将多个表达式排在一起，整个表达式返回最右边表达式的值
+!!!函数参数列表中逗号不是运算符
+9、void运算符
+  void运算符用于强行指定表达式不会有返回值(undefined)
+10、typeof和instanceof运算符
+   typeof(a) 或typeof a 返回变量a的数据类型  其中null:object、undefined:undefined
+alert(a instanceof Array);
+六、语句
+   所有语句都是分号结束
+1、语句块 { }
+2、空语句   ;
+3、异常抛出语句 throw new Error(errorString);
+4、异常的捕获
+try{statements}catch(e){statements}finally{statements}
+JavaScript与Java异常机制存在如下区别：
+- JavaScript只有一个异常类Error,无须在定义函数时声明抛出该异常，所以没有throws关键字
+- JavaScript是弱类型语言，所以catch语句后括号里的异常无须声明类型
+- JavaScript只有一个异常类，所以try块后最多只能有一个catch块
+- JavaScript获取异常是通过异常对象的message属性，而不是getMessage()方法
+5、with语句
+with(object){statements}  避免重复书写同一对象
+七、流程控制
+分支：if、if...else
+循环：while、do while、for、for in
+循环相关：break、continue、break
+八、函数
+1、定义函数
+- function hello(){}
+- var f=function(){}
+- var f=new Function(name,"('Function定义的函数&lt;br&gt;')"+"document.writeln('你好'+name);");
+!!!同一&lt;script&gt;元素中函数允许先调用再定义，不同&lt;script&gt;必须先定义再调用
+函数执行时到return语句会结束函数
+2、递归函数
+- var f=f(n){if(n==1){return 1;}else{return n*f(n-1);}}
+- alert（f(5));
+3、局部变量和局部函数
+有个函数块作用域
+4、函数、方法、对象和类
+JavaScript定义了一个函数后，实际上可以得到以下四项：
+  - 函数   像Java方法一样，这个函数可以调用
+  - 对象   定义一个函数时，系统会创建一个对象，是Function类的实例
+  - 方法   定义一个函数时，该函数通常会附加给某个对象，作为该对象的方法
+  - 类     定义函数的同时，也得到了一个与函数同名的类
+当我们定义一个函数后，可以有以下两种方法调用：
+  - 直接调用函数  调用函数总是返回最后的return语句的返回值，如果函数没return语句则没有返回值
+  - 使用new关键字调用函数  通过这种调用总有一个返回值，返回值就是一个JavaScript对象
+
+5、函数的实例属性和类属性  JavaScript中函数不仅仅是个函数，而且是个类
+根据函数中声明变量的方式，函数中的变量有3种
+  - 局部变量
+  - 实例属性   函数中以this修饰的变量
+  - 实例变量   函数中以函数名修饰的变量
+6、调用函数的3种方式
+  - p.walk();
+  - call()  通过call()调用函数时，括号内必须列出每一个参数
+  - apply() 通过apply()调用函数时，可以在括号内以arguments来代表所有参数
+  -- 函数.call(调用者，参数1，参数2...)
+var f=function(name,age){
+				document.write("name:"+name+",age:"+age+"&lt;br /&gt;");
+			}
+			f.call(window,"jack",20);
+			f.apply(this,["rose",10])
+7、函数的独立性
+定义函数时可以将函数定义成某个类的方法，某个对象的方法。但函数是独立的，永远不会从属于其他类、对象
+
+九、函数的参数的处理
+JavaScript的参数传递也全部是采用值传递方式
+1、基本类型和复合类型的参数传递
+基本类型采用值传递
+复合类型采用副本引用传递，副本和原本的都是指向同一地址
+2、空参数
+调用函数时并没有传入参数会自动设置为undefined类型
+JavaScript没有函数的重载。定义两个同名函数，后面的函数会覆盖前面的函数，不论函数参数是否相同
+3、参数类型
+JavaScript函数定义参数列表无须类型声明，可以在函数内对传入参数进行检查
+//if(typeof person=='object'&&typeof person.age=='number'){}else{alert("传入参数不符合");}
+
+十、使用对象
+1、面对对象的概念
+JavaScript不允许开发者指定类与类之间的继承关系。因此开发者定义的类没有父子关系，都是Object类的子类
+2、对象和关联数组
+JavaScript中的对象本质上是一个关联数组
+需要访问某个JavaScript对象的属性时，不仅可以使用obj.propName的形式，还可以采用obj[propName]的形式
+3、继承和prototype
+JavaScript直接动态为类增加方法，会性能低下和产生闭包，宜采用prototype
+Person.prototype.walk=function(){alert(this.name+"正在慢慢溜达...");}
+prototype可以动态为类增加属性和方法，这是一种伪继承，实质是修改了原有的类
+十一、创建对象
+  - new 构造器             var p1=new Person();
+  - Object直接创建对象     var myObj=new Object();
+  - JSON语法创建对象       var p={name:"jack",age:19};
+JSON创建数组   var a=['jack','rose']
+
+第二章 DOM编程详解
+一、DOM模型概述
+DOM是一种访问结构化文档(XML和HTML)的思想
+DOM模型中各个DOM节点，与HTML文档中的各个HTML元素一一对应。使用DOM模型，JavaScript可以动态更新HTML的内容
+二、DOM模型和HTML文档
+1、HTML元素之间的继承关系
+Node、Document、Element、HTMLElment都是普通HTML元素的超类，它们都包含的方法可被其他页面元素调用
+2、HTML元素之间常的包含关系
+使用DOM元素增加子元素时，必须注意元素之间的包含关系
+三、访问HTML元素
+1、根据ID访问
+document.getElementById("idVal");
+alert(document.getElementById("div").innerHTML);
+其他元素，包括列表框、下拉菜单的列表项、&lt;label...&gt;表单域、&lt;button&gt;都通过innerHTML访问他们内容
+alert(document.getElementById("textarea").value);
+只有&lt;input...&gt;生成的表单通过value来获取他们的内容
+2、利用节点关系访问HTML元素
+  - parentNode               返回当前节点的父节点。
+  - previousSibing           返回当前节点的前一个兄弟节点。
+  - nextSibing               返回当前节点的后一个兄弟节点。
+  - childNodes               返回当前节点的所有子节点。返回值是数组
+  - fistChild                返回当前节点的第一个子节点。
+  - lastChild                返回当前节点的最后个子节点。(这6个都是只读)
+  - getElementByTagName(tagName)  返回当前节点具有指定标签名的所有节点。返回值是数组并且是读写属性
+3、访问表单控件
+表单对象可以调用前面的基本属性和方法，还可以拥有以下几个常用属性：
+  - action         返回表单的action属性。读写属性
+  - elements       返回表单内全部控件所组成的数组。只读
+  - length         返回表单内表单域的个数。只读
+  - method         返回表单的method属性。读写属性
+  - target         用于确定表单提交里的结果窗口。读写属性，_self、_parent、_top、_blank
+Form对象还有以下两个方法：
+  - reset()        重设表单。
+  - submit()       提交表单。
+HTMLFormElement访问表单控单有以下三种语法：
+  - formObj.elements[index]          返回表单中第index个表单控件
+  - formObj.elements['elementName']  返回表单中id或name为elementName的表单控件
+  - formObj.elementName              返回表单中id或name为elementName的表单控件
+4、访问列表框、下拉菜单选项
+HTMLSelectElement支持以下属性：
+  - form          返回列表框、下拉菜单所在的表单对象。只读
+  - length        返回列表框、下拉菜单的选项个数。只读，可通过增删选项来改变
+  - options       返回列表框，下拉菜单的所有选项组成的数组。只读
+  - selectedIndex 返回下拉菜单中选中项的索引。读写属性，如果选中多个则返回第一个选中的索引
+  - type          返回下拉菜单的类型。select-multiple、select-one
+  - select.options[index]  返回列表框、下拉菜单的第index+1个选项
+HTMLOptionElement提供了以下几个常用属性
+  - form             返回选项所处列表项、下拉菜单的表单对象
+  - defaultSelected  返回该选项默认是否被选中。只读
+  - index            返回该选项的索引。只读，也可通过增删选项改变索引
+  - selected         返回该选项是否被选中。读写
+  - text             返回该选项呈现的文本。&lt;option&gt;和&lt;/option&gt;之间的文本，等同于innerHTML属性
+  - value            返回每个选项的value属性。读写
+5、访问表格子元素
+HTMLTableElement对象支持以下属性：
+  - caption          返回表格的标题对象。读写
+  - rows             返回表格里所有表格行(包括&lt;thead&gt;&lt;tfoot&gt;&lt;tbody&gt;)的数组。只读
+  - tbodies          返回表格里所有&lt;tbody&gt;元素组成的数组。
+  - thead            返回表张&lt;thead&gt;元素
+  - tFoot            返回表格&lt;tfoot&gt;元素
+  - table.rows[index]  返回表格的指定行
+HTMLTableRowElement对象支持以下属性：
+  - cells            返回表格行内所有单元格组成的数组。只读
+  - rowIndex         返回表格行在表格内的索引值。只读
+  - sectionRowIndex  返回表格行在其所在元素(&lt;thead&gt;或&lt;tfoot&gt;或&lt;tbody&gt;)的索引值。只读
+HTMLTableCellElement对象支持以下属性：
+  - cellIndex        返回该表格在表格行内的索引值。只读
+4、修改HTML元素
+修改HTML元素通过如下几个常用属性实现
+  - innerHTML        大部分HTML元素的呈现内容由该属性控制
+  - value            表单控件如&lt;input&gt;&lt;textarea&gt;的呈现内容由该属性控制
+  - className        修改HTML元素的CSS样式，该属性的合法值是一个class选择器名
+  - style            修改HTML内联css样式
+  - options[index]   直接对&lt;select&gt;元素的指定列表项赋值，可改变列表框、下拉菜单的指定列表项
+
+五、增加HTML元素
+1、创建或复制节点
+  - document.createElement(Tag)      创建Tag标签的节点
+  - cloneNode(boolean deep)           true时复制当前节点同时复制全部后代节点，false只复制当前节点
+//var ajax=ul.firstChild.nextSlibing.cloneNode(false);ul.appendChild(ajax);
+2、添加节点
+  节点创建后，需添加到DOM中才能有效果
+  - appendChild(Node newNode)               将newNode添加到当前节点的最后个子节点
+  - insertBefore(Node newNode,Node refNode) 在refNode节点之前插入newNode节点
+  - replaceChild(Node newNode,Node oldNode) 将oldNode节点替换成newNode节点
+3、为列表框、下拉菜单添加选项
+  调用HTMLSelectElement的add()方法添加选项
+  - add(HTMLOptionElement option,HTMLOptionElement before)   在before前添加option选项。before=null则在最后添加(IE8不支持为null)
+  直接为&lt;select...&gt;选项赋值
+  - new Option(text,value,defaultSelected,selected)            也可以是一个参数或二个参数
+  -- text             选项的文本内容
+  -- value            选中选项的值
+  -- defaultSelected  设置是否默认选中该项
+  -- selected         选项当前是否被选中
+4、动态添加表格内容
+HTMLTableElement对象有如下方法
+  - insertRow(index)      在Index处插入一行。返回HTMLTableRowElement
+  - createCaption()       为该表格创建标题(若有则返回已有标题)。返回HTMLTableCaptionElement
+  - createTFoot()         为该表格创建&lt;tfoot&gt;元素(若有则返回已有)。返回HTMLTableFootElement对象
+  - createTHead()         为该表格创建&lt;thead&gt;元素(若有则返回已有)。返回HTMLTableHeadElement对象
+HTMLTableRowElement包含以下插入单元格方法
+  - insertCell(long index)     在index处创建一个单元格。返回HTMLTableCellElement对象
+
+六、删除HTML元素
+1、删除节点
+  - removeChild(oldNode)           删除oldNode子节点
+2、删除列表框、下拉菜单的选项的两种方法
+  - remove(long index)           删除指定索引处的选项
+  - 将指定选项赋值为null
+// select.options[select.options.lenght-1]=null   删除最后一个选项
+3、删除表格行或单元格
+  - deleteRow(long index)     删除表格中index索引处的行
+  - deleteCell(long index）   删除某行index处的单元络
+// tab.deleteRow(tab.rows.lenght-1);  lastRow.deleteCell(lastRow.cells.lenght-1);
+
+七、传统DHTML原型
+在DHTML模型里，window对象代表整个窗口，也可以只是浏览器页面内的一个Frame
+window对象包括(navigator浏览器、frames框架页数组、location页面的URL、history访问历史、document文档本身、screen客户端屏幕)。
+document包括：all、body、forms、anchors、links、images、...这些属性返回值以数组形式存在
+访问页面控件有3种方法：
+  - document.images[0]      返回页面第一个图片元素
+  - document.images[idVal]     返回页面内id或name为idVal的图片对象
+  - document.images.idVal      返回页面内id或name为idVal的图片对象
+// alert(document.body.id);alert(document.images['lee'].alt);
+alert(form.innerHTML);alert(document.all['btn'].value);  firefox不支持all属性
+八、使用window对象
+全局变量作为window对象的一个属性，如果页面中有多个Frame，则有多个window对象，window中的全局变量不会互相影响
+window提供了以下方法，可以在JavaScript中直接使用
+  - alert()、confirm()、prompt()   分别用于弹出警告、确认和提示输入对话框
+  - close()                        关闭窗口
+  - focus()、blur()                让窗口获得、失去焦点
+  - moveBy()、moveTo()             移动窗口
+  - open()                         打开一个新的顶级窗口，用于装载URL指向的地址，并可指定一系列属性
+  - print()                        打印当前窗口或Frame
+  - resizeBy()、resizeTo()         重设窗口大小
+  - scrollBy()、scrollTo()         滚动当前窗口中的HTML文档
+  - setInterval()、clearInterval() 设置、删除定时器
+windos还提供了如下常用属性：
+  - closed                  返回一个boolean值，用于判断该窗口是否处于关闭状态
+  - defaultStatus、status   返回浏览器状态栏的文本
+  - document                返回该窗口内装载的HTML文档
+  - frames[]                返回该窗口内包含的Frame对象，每个Frame对象又是window对象
+  - history                 返回该窗口的浏览历史
+  - location                返回该窗口装载的HTML文档的URL
+  - name                    返回该窗口的名字
+  - navigator               返回浏览当前页面的浏览器
+  - parent                  如果当前窗口是一个Frame，则返回Frame的直接父窗口
+  - screen                  返回当前浏览者的屏幕对象
+  - self                    返回自身
+  - top                     如果当前窗口是一个Frame，则返回Frame的顶级父窗口
+1、访问历史
+window的history是一个History对象，表示当前窗口的浏览历史，支持以下方法：
+  - back()       后退到上一个浏览页面，如果该页面是第一个打开的则没效果
+  - foward()     前进到下一个浏览页面，前提是使用了back或go方法
+  - go(intValue) 指定前进(正数)或后退(负数)多少个页面
+2、访问页面URL
+window对象包含一个location属性，可用于访问该窗口或Frame所装载文档的地址。包含以下属性：
+  - hostname             文档所在的主机名
+  - href                 文档所在地址的URL地址
+  - host                 文档所在地址的主机地址
+  - port                 文档所在地址的服务端口
+  - pathname             文档所在地址的文件地址
+  - protocol             装载该文档所使用的协仪
+3、客户机屏幕信息
+window有一个screen属性，返回当前浏览者的屏幕对象，随不同平台而变化，通常包含以下属性
+  - width       屏幕横向分辨率
+  - height      屏幕纵向分辨率
+  - colorDepth  当前屏幕的色深
+4、弹出新窗口
+window的open()方法用于打开一个新窗口
+window.open("status.html","_blank","left=0,top=0,width="+window.screen.width+",
+height="+window.screen.height+",toolbar=no,menubar=no,resize=no");
+open()方法会被一些浏览器禁用，因此尽量少用
+5、确认和输入对话框
+&lt;a href="http://www.baidu.com" onclick="return confirm('请确认打开百度');"&gt;百度&lt;/a&gt;
+name=prompt("请输入你的名字：","");
+6、使用定时器
+  - setInterval("code",interval)   设置定时器。每隔interval毫秒重复执行一次code
+  - clearInterval(timer)           删除定时器
+
+九、navigator和地理位置
+window对象有一个navigator属性，对应navigator对象，包含以下常用属性
+  - appName        返回浏览器内核名称
+  - appVersion     返回浏览器当前版本号
+  - platform       返加浏览器所在的操作系统
+1、navigator新增geolocation属性
+Geolocation对象提供了以下3个方法
+  - getCurrentPosition(onSucess,onError,options)  请求获取地理位置。成功获取回调函数、失败回调函数、额外选项
+  - watchCurrentPosition(onsucess,onError,options) 持续监听地理位置,返回int类型的标识
+  - clearWatch(watchld)     停止持续监听地理位置,参数就是上个方法返回的标识
+①获取成功的回调函数function(positon){},其中position对象包括以下两个属性:
+  - timestamp         该属性返回获取地理位置的时间
+  - coords            该属性返回一个Coordinates对象.该对象包含了详细的地理信息.
+Coordinates对象有以下属性:
+  -- longitude   经度值
+  -- latitude    纬度值
+  -- altitude    高度值
+  -- accuracy    返回经纬度的精度，以米为单位
+  -- altitudeAccuracy 返回高度的精度，以米为单位
+  -- speed       返回浏览器所在设备的移动速度。不能获取速度时返回null
+  -- heading     返回浏览器所在设备的移动方向。不能获取时返回null
+  -- timestamp   返回获取地理位置的时间戳
+②获取失败的回调函数
+function(error){}的回调函数中error包含了错误信息。error对象包括以下属性
+  - code    返回错误代码(123)。1用户拒绝了位置服务、2无法获取地址位置信息、获取地理位置信息超时
+  - message 返回错误描述信息。很多浏览器并不提供
+③获外的选项
+上面两个方法的第3个参数就获取地理位置信息时的额外选项。
+该参数是一个JavaScript对象，支持以下属性：
+  - enableHighAccuracy   指定是否要求高精度的地理位置信息
+  - timeout              指定获取地理信息时的超时时长。如果该时间内没获取到将发生错误
+  - maximumAge           指定地理信息的缓存时间，以毫秒为单位
+十、使用document对象
+JavaScript的document对象即可以作为HTMLDocument使用，也可以作为DHTML的document使用
+document除了可以使用DOM模型的方法外，还可以使用以下几个常用方法：
+  - close()     结束一个通过open()打开的document对象
+  - open()      打开一个document对象
+  - write()     向document对象中输出一条字符串，输完后不换行
+  - writeln()   向document对象中输出一条字符串，输完后换行
+还有以下几个常用属性：
+  - alinkColor、linkColor、vlinkColor、bgColor、fgColor 
+分别对应HTML中超链接激活时、没有访问过、访问过、背景、前景的颜色
+  - all             返回文档中所有的子元素
+  - anchors         返回文档中所有命名锚点
+  - applets         返回文档中所有applets数组
+  - cookie          该属性用于读写HTPP cookie
+  - documentElement 返回文档的根元素。通常就是返回&lt;html&gt;
+  - froms           返回该document包含的表单数组
+  - frames          返回该document包含的全部Frame集合
+  - images          返回该document包含的全部图像数组
+  - lastModified    返回该document的最后修改时间
+  - links           返回该document包含的全部超链接的数组
+  - location        该属性的作用类似于URL
+  - referrer        该属性返回上一个页面的URL
+  - scripts         该属性返回该document对象中包括的所有脚本的数组
+  - tyleSheets      该属性返回该document对象中的全部CSS样式的数组
+  - title           该属性返回document对象的标题。&lt;title&gt;&lt;/title&gt;之间的部分
+  - URL             该属性返回document所在的URL,与location的href属性值相同
+1、动态页面
+2、读写Cookie
+JavaScript控制浏览器写Cookie很简单，直接给document.cookie赋值即可，这个属性值必须为以下格式：
+&lt;name&gt;=&lt;value&gt;
+name和value可以任意指定，添加Cookie时还可以指定以下几个属性：
+  - max-age          Cookie存活的最长有效期。以秒为单位
+  - expires          Cookie的过期时间
+  - path             Cookie的路径
+  - domain           Cookie属于哪个域
+  - seure            Cookie的安全属性
+document.cookie="name=car;max-age="+(60*60*24*365);
+documnet.cookie="name=dog;max-age="+(60*60*24*365)+";domain=qq.com";
+
+十一、HTML5新增的浏览器分析
+html5为window新增了performance属性，也是一个可用的全局performance对象，
+该对象可以对浏览器进行分析
+1、分析时间性能
+performance对象包含了一个timing属性，timing对象提供了以下属性：
+  - navigationStart   返回成功卸载前一个文档的时间，如果不存在前一个文档与fetchStart属性返回的时间相同
+  - unloadEventStart  返回浏览器开始卸载前一个文档的时间，如不存在返回0
+  - unloadEventEnd    返回浏览器卸载前一个文档完成时的时间，如不存在返回0
+  - redirectStart     返回浏览器开始重定向的时间
+  - redirectEnd       返回浏览器重定向结束的时间
+  - fetchStart        返回浏览器开始获取该资源的时间
+  - domainLookupStart 返回浏览器开始查找当前文档所在的域名的时间
+  - domainLookupEnd   返回浏览器相找当前文档所在域名的结束时间
+  - connectStart      返回浏览器与远程服务器开始建立连接时的时间
+  - connectEnd        返回浏览器与远程服务器建立连接完成时的时间
+  - requestStart      返回浏览器开始向远程服务器请求该文档时的时间
+  - responseStart     返回浏览器接收到远程服务器返回的当前文档第一个字节时的时间
+  - responseEnd       返回浏览器接收完远程服务器返回的当前文档所有字节时时的时间
+  - loadEventStart    返回当前文档的onload事件监听器被触发时的时间，如果没有，则是0
+  - loadEventEnd      返回当前文档的onload事件监听器响应完成时的时间，如果没有则是0
+2、分析导航行为
+performance对象还包括一个navigation属性，该对象包括以下两个属性
+  - type 返回进入该页面的方式。该属性返回如下属性值：
+  -- TYPE_NAVIGATE(数值为0)        正常进入该页面。比如超链接、输入页面URL、提交有单
+  -- TYPE_RELOAD(数值为1)          重新加载进入该页面。比如刷新、location。reload();
+  -- TYPE_BACK_FORWARD(数值为2)    通过"前进"方式进入该页面。
+  -- TYPE_RESERVED(数值255)        如果不是上面几种情况，将回返回该属性值。
+  - redirectCount  返回重定向的次数
+  	</pre>
+</body>
+</html>

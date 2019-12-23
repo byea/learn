@@ -1,0 +1,445 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+<pre> 
+ HTML5/CSS3/JavaScript
+
+第一章 HTML5 常用元素与属性
+一、基本元素
+1、常见元素
+&lt;!--  --&gt;   注释
+&lt;html&gt;      根元素
+&lt;head&gt;	    页面头部分
+&lt;title&gt;     页面标题
+&lt;body&gt;      页面主体部分
+&lt;h1&gt;..&lt;h6&gt;  定义标题一到标题六
+&lt;p&gt;         定义段落
+&lt;br&gt;        插入一个换行符
+&lt;hr&gt;        定义水平线
+&lt;div&gt;       定义文档中的节
+&lt;span&gt;      与&lt;div&gt;类似不会换行
+
+2、文本格式化元素
+&lt;b&gt;         定义粗体文本                font-weight:block;         
+&lt;i&gt;         定义斜体文本                font-style:italic
+&lt;em&gt;        定义强调文本，效果与斜体差不多
+&lt;strong&gt;    定义粗体文本
+&lt;small&gt;     定义小号字体文本 
+&lt;sup&gt;       定义上标文本
+&lt;sub&gt;       定义下标文本
+&lt;bdo&gt;       定义文本的显示方向 // &lt;bdo dir="rtl"&gt;从右到左的文本&lt;/bdo&gt;
+
+3、语义相关元素
+&lt;abbr&gt;      表示一个缩写 //&lt;span&gt;我的爱好是&lt;abbr title="骑着自行车旅行!"&gt;骑行&lt;/abbr&gt;&lt;/span&gt;
+  - title     该属性用于代表该缩写所代表的全称
+&lt;address&gt;   用于表示一个地址或作者联系信息。通常以斜体显示
+&lt;blockquote&gt;用于引用一段长的文本
+  - cite      该属性用于指定该引用文本所引用的网址URL  浏览器不太支持
+&lt;q&gt;         定义一段短的文本，浏览器会为引用文本添加引号
+&lt;cite&gt;      表示作品的标题，通常用会斜体显示
+&lt;code&gt;      表示计算机的代码
+&lt;dfn&gt;       定义一个专业术语,通常用会斜体显示
+&lt;del&gt;       定义文档中删除的文本。以中划线显示文本
+&lt;ins&gt;       定义文档中插入的文本。以下划线显示文本
+&lt;pre&gt;       表示它所包含的文本已经预格式化，但会处理其内html的大部分元素
+&lt;samp&gt;      定义示范文本内容
+&lt;kbd&gt;       定义键盘文本
+&lt;var&gt;       表示一个变量,斜体显示所包含的文本
+
+4、超链接和锚点
+&lt;a&gt;
+  - href    指定超链接所关连的另一个资源
+  - target  指定装载另一个资源的框架  _self自身 _blank新窗口 _top顶层框架 _parent父框架
+  - media   指定目标URL类型。默认为all。只有指定href时才生效
+    href    可以是绝对路径也可以是相对路径
+            绝对路径 scheme://host.domain/port/path/filename
+&lt;a name="test"&gt;&lt;/a&gt;                     定义锚点
+&lt;a href="1.html#test"&gt;返回网页一&lt;/a&gt;    回到指定网页的锚点
+
+5、列表相关元素
+&lt;ul&gt;        无序列表
+&lt;ol&gt;        有序列表
+  - start   指定序列开始的数。如1、A等
+  - type    指定使用哪种类型的编号,推荐使用CSS
+&lt;li&gt;        定义列表项目  在&lt;ul&gt;或&lt;ol&gt;中使用
+&lt;dl&gt;        定义列表
+&lt;dt&gt;        标题列表项目  在&lt;dl&gt;中使用
+&lt;dd&gt;        普通列表项目  在&lt;dl&gt;中使用
+
+6、图像相关元素
+&lt;img&gt;       空元素
+  - src     指定图片文件在位置
+  - alt     指定文本，当加载图片失败说明文本
+  - height  指定图片的高度。可以是像素或百分比
+  - width   指定图片的宽度。可以是像素或百分比
+&lt;map&gt;       用于图片映射,包含一个或多个&lt;area../&gt;
+  - &lt;area&gt;  用于定义映射的内部区域
+     - shape   指定内部区域,默认是"rect"还可以是"circle"和"ploy"
+     - coords  指定多个坐标,用于确定区域位置
+     - href    该区域所链接的资源
+     - alt     图片加载失败时文本提示信息
+     - target  框架加载方式
+     - media   目标URL所引用的资源类型.默认为all
+//&lt;img src="web\4.jpg" alt="" width="400" heitht="400" usemap="#test" /&gt;
+&lt;map name="test" id="test"&gt;
+  &lt;!--rect:  coords="第一个角点x,y,第二个角点x,y"  两对角点确定一矩形--&gt;
+   &lt;area shape="rect" coords="390,80,10,20" href="web\5.jpg" alt="" target="_blank" /&gt;
+  &lt;!--poly:  coords="第一点x,y,第二点x,y,第三点x,y..."  多点确定多边形--&gt;
+   &lt;area shape="poly" coords="150,100,150,160,30,80" href="web\6.jpg" alt="" /&gt;
+	&lt;/map&gt;
+
+7、表格相元素
+&lt;table&gt;     用于定义表格
+  - cellpadding   单元格内容和边框之间的间距
+  - cellspacing   单元格和单元格之间的间距
+  - width         表格的宽度。可以是像素或百分比
+&lt;caption&gt;         定义表格的标题
+&lt;tr&gt;              定义表格行
+&lt;td&gt;              定义单元格
+  - colspan       指定单元格跨多少列
+  - colrow        指定单元格跨多少行
+  - width
+  - height
+&lt;th&gt;              定义页眉的单元格。用法和&lt;td&gt;几乎一样
+&lt;tbody&gt;           定义表格的主体。只能包含&lt;tr /&gt;子元素
+&lt;thead&gt;           定义表格头,用法与&lt;tbody&gt;类似
+&lt;tfoot&gt;           定义表格尾,用法与&lt;tbody&gt;类似
+
+8、框架元素
+&lt;iframe&gt; 
+  - src     指定一个URL装载的页面 //&lt;iframe src="main.html" width"200" height="200"&gt;&lt;/iframe&gt;
+
+二、html5 新增通用属性
+1、可编辑属性contentEditable  如果为true允许开发者编辑该html元素的内容，并且子标签可继承父标签的可编辑属性
+//&lt;div contentEditable="true"&gt;&lt;span&gt;content&lt;/span&gt;&lt;/div&gt;  这样&lt;div&gt;内支持编辑的标签内容就可以编辑
+
+2、全局可编辑属性designMode   如果为on则该页面上所以支持contentEditable属性的元素都是可以编辑状态
+//&lt;body ondblclick="document.designMode='on';"&gt; 双击该页面后就进入可编辑状态
+
+3、hidden属性   hidden="ture" 相当于CSS中display:none
+//&lt;div  hidden="true" style="height:80px"&gt;文字内容&lt;/div&gt; 这样"文字内容"就隐藏了
+
+4、检查属性spellcheck
+//&lt;textarea spelllcheck="true" rows="3" cols="40"&gt;&lt;/textarea&gt; 能检查&lt;textarea&gt;中输入错误的英文单词（不常用）
+
+三、html5 新增的常用元素
+
+1、文档结构元素
+&lt;acticle&gt;        该元素用于代表页面上独立、完整的一篇"文章"
+    规则如下：&lt;acticle.../&gt;元素内部可以使用&lt;header.../&gt;定义文章"标题"部分、使用&lt;footer.../&gt;定义文章"脚注"部分、
+使用多个&lt;section.../&gt;把文章内容分成几个段落，内部还可以嵌套多个&lt;acticle.../&gt;作为它的附属文章
+&lt;section&gt;        对页面内容进行分块
+    规则如下：&lt;section.../&gt;通常建议包含一个标题（&lt;h1&gt;-&lt;h6&gt;定义的标题）、可以包含多个&lt;acticle.../&gt;表示该分块包含
+多篇文章、也可以嵌套多个&lt;section.../&gt;表示该"分块"包含多个子分块
+&lt;nav&gt;        定义页面上的导航条
+&lt;aside&gt;      定义当前页面或文章的附属信息、使用CSS渲染成侧边栏
+&lt;header&gt;     定义文章的"头部"信息。可以包含多个标题元素和&lt;span&gt;&lt;p&gt;等元素
+&lt;hgroup&gt;     组织多个&lt;h1&gt;-&lt;h6&gt;这样的元素
+&lt;footer&gt;     用于为&lt;acticle&gt;作为"脚注"部分
+&lt;figure&gt;     用于表示一块独立的"图片区域"。内部可包含一个或多个&lt;img../&gt;元素。还可以包含一个&lt;figcaption&gt;
+&lt;figcaption&gt;  通常放在&lt;figure.../&gt;内部，用于定义"图片区域"的标题
+
+2、语义相关元素
+&lt;mark&gt;      用于显示页面中需要重点"关注"的内容，浏览器通常以黄色显示
+&lt;time&gt;      被标注内容是日期、时间或日期时间
+   - datetime    主要用于向机器提供标准时间格式
+//软件教育将于龙年的&lt;time datetime="2012-01-30T09:00"&gt;正月初八&lt;/time&gt;开始上班
+
+3、两个特殊功能的元素
+&lt;meter&gt;      表示已知最大值和最小的计数仪表。
+   - value  仪表的当前值   - min 表的最小值  - max 仪表的最大值
+   - low 指定范围的最小值  - hight 指定范围的最大值 - optimun 最佳值
+//车速度是:&lt;meter value="120" min="0" max="220" low="0" high="160"&gt;120&lt;/meter&gt;千米/小时
+&lt;progress&gt;
+   - max 进度完成的值
+   - value  当前进度的值
+//任务完成比：&lt;progress value="30" max="100"&gt;30/100&lt;/progress&gt;	
+
+四、html5 头部和元信息
+&lt;head.../&gt;可以定义html文件头，该元素可以包含如下元素
+&lt;script&gt;     用于包含JavaScript脚本
+&lt;style&gt;      用于定义内部CSS样式
+&lt;link&gt;       用于链接外部CSS样式等资源
+&lt;title&gt;      用于定义文档标题
+&lt;base&gt;       用于指定该页面中所有链接的基准链接
+   - href：指定所有链接的基准链接
+   - target:  指定超链接默认在哪个窗口打开
+//&lt;base target="_blank" href="http://www.baidu.com" /&gt;
+&lt;meta&gt;       用于定义html页面的元数据.也是就指定一些name-value对,可以指定id外,还可以指定如下三个属性
+   - http-equiv 指定元信息的名称.向浏览器传回有用的信息,帮助浏览器正确处理网页内容
+   - name       指定元信息的名称,可以随意指定
+   - content    指定元信息的值
+http-equiv 所支持续的值主要有以下几个
+   - Expries 指定网页的过期时间.一旦网页过期,必须从服务器上下载
+//&lt;meta http-equiv="Expires" content="Sat Sep 27 16:12:36 cst 2008" /&gt;
+   - Pragma  指定禁止浏览器从本地磁盘缓存中调阅页面内容,浏览器一旦离开该网页就无法脱机访问访页面
+//&lt;meta http-equiv="Pragam" content="no-cache" /&gt;
+   - Refresh 指定多长时间自动刷新指定页面
+//&lt;meta http-equiv="Refresh" content="2" /&gt;设置两秒后自动刷新本页
+//&lt;meta http-equiv="Refresh" content="2:URL=http://www.baidu.com" /&gt;设置两秒后自动刷新到http://www.baidu.com
+   - Set-Cookie:设置Cookie.如果网页过期,那么客服端的Cookie也被删除
+//&lt;meta http-equiv="Set-Cookie" content="name=value expires = Sat Sep 27 16:12:36 CST 2008, path=/" /&gt;
+   - content-Type 设置该页面的内容类型和所用的字符集.
+&lt;meta http-equiv="content-Type" content="text/html; charset=UTF-8" /&gt;
+   除此之外还有一些不太常用的属性值
+
+第二章 表单相关元素和属性
+一、原有表单及表单控件
+1、表单元素
+&lt;from&gt;        用于生成表单，不会产生可视化部分。
+   - action    单击"确认"时表单被提交的位置
+   - method    提交表单时以何种类型的请求。get(！&gt;2KB)或post(安全)
+   - enctype   指定对表单内容进行编码所用的字符集
+   - name      指定表单的唯一名字，建议与id值保持一致
+   - target    指定以哪种方式打开目标URL(如果请求会打开另一个URL资源)
+ectype  指定表单数据的编码方式
+   - application/x-www-form-urlencoded: 默认编码方式，只处理表单控件里的value属性值，处理成URL编码方式
+   - multipart/form-data: 以二进制处理表单数据，会把文件域或指定文件也封装到请求参数里，上传文件时使用该方式
+   - text/plain: 当表单的action属性值为mailto:URL时，使用这种编码方式
+&lt;form.../&gt;元表里定义的表单控件的请求规则如下：
+   - 每个name对应一个请求参数，没有name就不会生成请求参数
+   - 多个表单控件有相同的name属性时，则多个表单控件只生成一个请求参数，只是该参数有多个值
+   - 表单控件的name属性指定请求参数名，value属性指定请求数值
+   - 如果某表单控件设置了disabled或disable="disable"属性，则该表单控件不再生成请求参数
+   - 每个表单控件可以设置tabIndex属性值，让用户无需鼠标用Tab键在各表单上移动
+
+2、input元素
+单行文本框：&lt;input type="text" /&gt;
+密码输入框: &lt;input type="password" /&gt;
+隐藏域：    &lt;input type="hidden" value=""/&gt;
+单选框：    &lt;input type="radio" value="" /&gt;
+复选框：    &lt;input type="checkbox" value="" /&gt;
+图像域：    &lt;input type="image" width="" height="" /&gt;
+文件上传域：&lt;input type="file" /&gt;
+提交按钮    &lt;input type="submit" value="提交"/&gt;
+重设按钮    &lt;input type="reset" value="重置" /&gt;
+普通按钮    &lt;input type="button" value="按钮一" /&gt;
+&lt;input.../&gt;元素可以指定id、style、class等核心属性，onclick事件属性，onfocus、onblur等级焦点事件属性，还可以指下以下属性
+   - checked    设置单、复选框初始状态是否处于选中状态
+   - disabled   设置首次加载时禁用此元素
+   - maxlength  该属性是一个数值，设置文本框中所允许输入的最大字符数
+   - readonly   指定该文本框内的值不允许用户修改（可以用JavaScript修改）
+   - size       该属性是一个数值，指定该元素的宽度
+   - src        指定图像域所显示图像的URL,当type="image"时
+
+3、使用label定义标签
+&lt;label.../&gt;     对可生成请求参数的表单控件元素进行说明，还可以获得更好的用户体验
+//&lt;label for="username"&gt;用户名：&lt;input type="text" name="username" id="username" /&gt;
+
+4、使用button定义按钮
+&lt;button.../&gt;    用于定义一个按按钮，元素内部可以包含普通文本、文本格式化标签、图像等内容
+&lt;button&gt;可指定id、class、style等核心属性，还可以指定onclick等级事件属性，还可以指定以下属性：
+   - disabled   指定是否禁用此按钮
+   - name       指定按钮的唯一名称。应与id属性值保持一致
+   - type       指定按钮的类型。只能是button、submit、reset其中之一
+   - value      指定该按钮的初始值。可以通过脚本修改
+
+5、列表框和下拉菜单
+&lt;select.../&gt;    创建列表框或下拉菜单，与&lt;option.../&gt;元素结合使用，不能指定value属性
+&lt;select&gt; 除了可以指定id、style、class等核心属性，仅可以指定onchange事件属性(选项改变触发事件),还可以指下如下属性：
+   - disabled   设置禁用该列表框和下拉菜单
+   - multiple    设置该列表框或下拉菜单允许多选。=
+   - size       设置该列表框内同时显示多少个列表项
+//&lt;select id="skill" name="skill" multiple="multiple" size="3" &lt;!--disabled="disabled"--&gt;&gt;
+注意：当&lt;select&gt;指定了multiple或size就为列表，否则为下列菜单
+&lt;select&gt;只能包含以下两种元素
+   - &lt;option.../&gt;   用于定义列表选项或菜单项.可以指定如下属性：
+      -- disabled    指定禁用该选项
+      -- selected   该选项初始状态是被选中状态
+      -- value      指定该选项对应的请求参数
+   - &lt;optgroup.../&gt; 用于定义列表英或菜单项的组
+      -- label      指定该选项组的标签。这个属性必填。
+      -- disabled   禁用该选项组里的所有选项
+
+6、使用textarea定义文本域
+&lt;textarea.../&gt;   用于生成多行文本域
+&lt;textarea&gt;可以指定onclick等事件属性，还可以指定onselect、onchange两个属性，还可以指定如下属性:
+   - cols      指定文本域的宽度，该属性必填
+   - rows      指定文本域的高度，该属性必填
+   - disabled  指定首次加载时禁用此文本
+   - readonly  指定该文本域外只读。
+   - name      作为请求参数的参数名，不可以指定value
+
+二、html5新增的属性与元素
+1、form属性
+     定义该表单控件所属的表单,表单控件就可以不放在表单内。
+//&lt;textarea name="desc" form="addForm"&gt;&lt;/textarea&gt; 提交id=addForm的表单时textarea也会被提交
+
+2、formaction属性
+     定义不同按钮提交到不同的action
+//&lt;input type="submit" value="注册" formaction="regist"/&gt;
+
+3、formxxx属性
+  - formenctype 通过该属性可以让按钮动态地改变表单的enctype属性
+  - formmethod  通过该属性可以让按钮动态地设置表单以POST或GET方式提交
+  - formtarget  通过该属性可以让铵钮动态地改变表单的target属性
+//&lt;input type="submit" value="GET提交" formmethod="get" /&gt;
+//&lt;input type="submit" value="POST提交" formmethod="post" /&gt;
+
+4、autofocus属性
+    设置打了页面时，某一控件自动获得焦点。整个页面只有一个表单控件可设置该属性
+
+5、placeholder属性
+   单行或多行文本显示对用户的提示信息，一旦用户输入，提示信息自动消失。
+//用户名:&lt;input type="text" name="name" placeholder="请输入用户名" /&gt;
+
+6、list属性
+  允许用户输入，也允许通过下拉菜单选择
+ - datalist  生成一个隐藏的下拉菜单
+//&lt;form method="post" action="buy"&gt;
+//请输入图书:&lt;input type="text" name="name" list="books"/&gt;&lt;br/&gt;
+//&lt;input type="submit" value="购买"/&gt;  &lt;/form&gt;
+//&lt;datalist id="books&gt;
+//   &lt;option value="java"&gt;java讲义&lt;/option&gt;
+//   &lt;option value="ee"&gt;java EE&lt;/option&gt;
+//&lt;/datalist&gt;
+
+7、功能丰富的input元素
+  - color      生成一个颜色选择器 &lt;input name="color" type="color" /&gt;
+  - date       生成一个日期选择器
+  - time       生成一个时间选择器
+  - datetime   生成一个UTC日期时间选择器
+  - datetime-local  生成一个本地日期时间选择器
+  - week
+  - month
+  - email      生成一个E-mail输入框，自动检查文本的value，若不符则不可以提交表单
+  - tel
+  - url        生成一个URL输入框，自动检查文本的value，若不符则不可以提交表单
+  - number     生成一个输入数字的文本框
+  - range      生成一个拖动条
+    --min  -- max   -- step
+  - serch      生成一个用于搜索关键字的文本框。与"text"没有太大区别
+
+三、HTML5增强的文件上传域
+1、FileList与File对象
+&lt;input type="file" .../&gt;
+  - accept       一个或多个以逗号分隔的MIME值。
+  - multiple     是否允许选择多个文件
+javaScript通过files属性访问，返加一个fileList数组类型
+
+2、使用FileReader读取文件内容
+   FileReader
+  - readAsText(file,encoding)   以文本方式读取文件。wncoding指定字符集，默认值：utf-8
+  - readAsBinary(file)          以二进制读取文件。这样可以通过Ajax把数据上传到服务器
+  - readAsDataURL(file)         以DataURL方式读取文件。
+  - abort()                     停止读取
+  - onloadstart                 FileReader开始读取数据时触发该事件指定的函数
+  - onprogress                  FileReader正在读取数据时触发该事件指定的函数
+  - onload                      FileReader成功读取数据后触发该属性事件的函数
+  - onloadend                   FileReader读取数据完成后触发该事件指定的函数。不论成功还是失败
+  - onerror                     FileReader读取失败时触发该事件指定的函数
+
+四、HTML5新增的客户端校验
+1、使用校验属性进行校验
+   HTML5为表单控件新增了如下几个校验属性
+  - required   该属性指定表单控件必须填写。属性值省略或是required
+  - pattern    该属性指定该表单控件的值必须符合指定的正则表达式
+  - min、max、step   只对数值、日期类型的&lt;input.../&gt;元素有效
+//图书价格：&lt;input type="number" name="price" min="10" max="200" step="0.01"  required /&gt;
+
+2、通过checkValidity方法进行校验
+   HTML5为表单控件提供的checkValidity()方法返回值(true和false)校验
+
+3、自定义错误提示
+  - setCustomValidity   当表单控件本身没有通过输入效验时才调过该方法
+//if(!document.getElementById("name").checkValidity()){
+//document.getElementById("name").setCustomValidity("图书名是必填的!");}
+
+4、关闭校验
+  - &lt;from.../&gt;增加novalidate属性，该属性可省略或是novalidate
+  - submit的&lt;input.../&gt;或&lt;button.../&gt;设置formnovalidate属性，该属性可省略或是formnovalidate
+
+第三章  HTML5的绘图支持
+
+一、使用canvas元素
+  - height    设置画布组件的高度
+  - width     设置画布组件的宽度
+canvas画图必须经过以下三步：        //&lt;canvas id="can" width="200" height="400"&gt;&lt;/canvas&gt;
+  (1)获取canvas元素对应的DOM对象    //var canvas=document.getElementById("can");
+  (2)调用Canvas对象的getContext()方法，该方法返回一个CanvasRenderingContext2D对象
+                                    //var ctx=canvas.getContext('2d');
+  (3)调用CanvasRenderingContext2D对象的方法绘图
+      //ctx.fillStyle='#aaa'; ctx.fillRect(30,40,80,100);
+
+二、绘图
+1、canvas绘图基础:CanvasRenderingContext2D
+CanvasRenderingContext2D提供的方法
+CanvasRenderingContext2D提供的属性
+
+2、绘制几何图形
+  - fillRect(float x,float y,float width,float height)     填充一个矩形区域
+	//ctx.fillStyle='#f00';  ctx.fillRect(30,20,120,60);
+  - strokeRect(float x,float y,float width,float height)   绘制一个矩形边框
+	//ctx.strokeStyle='#00f'; ctx.lineWidth=10;ctx.lineJoin="round"';
+ctx.strokeRect(80,160,120,60);
+
+3、绘制字符串
+  - fillText(String text,float x,float y,[float maxWidth])         填充字符串
+  - strokeText(String text,float x,float y,[float maxWidth])       绘制字符串边框
+  -- textAlign                设置字符串的水平对齐方式。start、end、left、right、center
+  -- textBaseAlign            设置字符串的垂直对齐方式。top、hanging、middle、alphabetic、idecgraphic、bottom
+4、设置阴影
+  - shadowBlur         设置阴影模糊度
+  - shadowColor        设置阴影颜色
+  - shadowOffsetX      设置阴影在X方向的偏移
+  - shadowOffsetY      设置阴影在Y方向的偏移
+5、使用路径
+  在canvas上绘制更复杂的图形，必须在canvas上启用路径，借助于路径来绘制图形
+  （1）调用beginPath()方法开始定义路径
+  （2）各种方法添加子路径
+  （3）closePath()方法关闭路径
+  （4）fill()或stroke()方法  来填充或绘制路径边框
+   添加子路径方法如下：
+  - arc(float x,float y,float radius,float startAngle,endAngle,boolean counterclockwise)
+     绘制以(x,y)为圆心，radius为半径，从startAngle角度开始 到endAngle角度结束的圆弧，是否取反路径
+  - arcTo(float x,float y,float x2,float y2,float radius)   向当前路径添加一段弧
+  - bezierCurveTo(float X1,floatY1,float X2,float Y2,float x,float y) 向当前路径添加一段贝济埃曲线
+  - lineTo(float x,float y)     从当前结束点连接到x,y对应点
+  - moveTo(float x,float y)     从当前结束点移动到x,y对应点
+  - quadraticCurveTo(float cpX,float cpY,float x,float y)   当前路径上添加一段二次曲线
+  - rect(float x,float y,float width,float height)          当前路径上添加一个矩形
+
+6、绘制位图
+  - void drawImage(Image image,float x,float y)   把image绘制到x,y处。图片保持原大小
+  - void drawImage(Image image,float x,float y,float width,float height)
+       把image绘制到x,y处，并缩放宽为width高为height
+  - void drawImage(Image image,integer sx,integer sy,integer sw,integer sh,float dx,float dy,float dw,float dh)
+       在image上从点sx,sy处挖宽=sw高=sh的图片，放到点dx,dy 并且宽dw高dh
+
+三、图形特效处理
+1、使用坐标变换
+  - translate(float dx,float dy)        平移坐标系统。把(0,0)坐标移动到(dx,dy).
+  - scale(float sx,float sy)            缩放坐标系统。
+  - rotate(float angle)                 旋转坐标系统。
+  - save()       保存当前绘图状态
+  - restore()    恢复之前保存的绘图状态
+2、坐标变换与路径相结合
+
+
+第四章 HTML5的多媒体支持
+
+一、使用audio和video元素
+  &lt;audio src='demo.ogg" controls&gt;
+  &lt;video src="move.webm" controls&gt;
+  - src        指定音频、视频的URL地址
+  - autoplay   当音频、视频加载完成后自动播放。  指定了会忽略preload属性
+  - controls   播放音频、视频时显示控制条
+  - loop       音频、视频播放完成后再次重复播放
+  - preload    auto:预加载音频、视频 none:不预加载 metadata:只加载音频、视频的元数据
+  - poster     指定一张图片URL，当视频下载完成、开始播放前显示该图片
+  - width      指定&lt;video&gt;的宽度
+  - height     指定&lt;video&gt;的高度
+
+二、使用javascript控制媒本播放
+  - play()               播放音频、视频
+  - pause()              暂停播放
+  - load()               重新装载音频、视频文件
+  - canPlayType(type)    判断是否可播放的type类型文件。audio/ogg;audio/mpeg
+     返回三种值 probavy:支持  maybe:可能支持 "":不支持
+	 </pre>
+	</body>
+</html>

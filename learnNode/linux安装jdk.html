@@ -1,0 +1,44 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+	<pre> 
+1、下载JDK
+2、更改权限
+   chmod 755 jdk-8u144-linux-x64.tar.gz
+ 复制并解压JDK
+①将/home/sxd/下载/jkd-8u221-linux-x64-tar.gz文件拷贝一份到/usr/java    (先建好/usr/java/ 目录)
+   mkdir /usr/java
+   cp jkd-8u221-linux-x64-tar.gz /usr/java/
+   tar -zxvf jkd-8u221-linux-x64-tar.gz
+③删除JDK压缩包
+   rm -f jkd-8u221-linux-x64-tar.gz
+
+    配置JDK环境变量
+①编辑全局变量
+vim /etc/profile
+在文本的最后一行粘贴如下：
+注意JAVA_HOME=/usr/java/jdk1.8.0_144 就是你自己的目录
+#java environment
+输入
+
+export JAVA_HOME=/usr/java/java1.8
+
+export JRE_HOME=$JAVA_HOME/jre  
+
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+
+第五步　　让刚刚设置的环境变量生效并检查是否安装成功
+①让刚刚设置的环境变量生效
+source /etc/profile
+source /etc/profile或 . /etc/profile
+②检查是否配置成功
+java -version
+	</pre>
+</body>
+</html>

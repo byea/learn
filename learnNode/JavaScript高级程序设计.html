@@ -1,0 +1,363 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+	<pre>
+JavaScript分三部分：ECMAScript(核心)、DOM(文档对象模型)、BOM(浏览器对象模型)。
+  其他DOM标准：SVG(可伸缩矢量图)、MathML(数学标记语言)、SMIL(同步多媒体集成语言)
+
+第一章 在HTML中使用JavaScript
+1.1 &lt;script&gt;元素
+   - async     异步加载.只适用外部文件
+   - charset   通过src属性指定代码的字符集
+   - defer     立即下载，延迟执行.只适用外部文件
+   - src       引入的外部文件地址.有此属性会忽略script标签间的代码
+   - type      编写代码使用的脚本语言的内容类型（MIME）
+	async与defer区别：async不能保证多个async脚本按顺序执行。
+1.2 嵌入代码与外部文件
+  - 可维护性
+  - 可缓存
+  - 适应未来
+1.3 文档模式
+  - 标准模式 &lt;!DOCTYPE html&gt;
+  - 混杂模式  影响CSS的呈现，甚至有时影响JavaScript的执行效果
+1.4 &lt;noscript&gt; 元素
+  - 浏览器不支持JS 或 浏览器支持JS但被禁用JS
+  例：&lt;noscript&gt;本页面需要浏览器支持（启用）javascript&lt;/noscript&gt;
+
+第二章 ECMAScipt基本概念
+2.1 语法
+   - 区分大小写字母
+   - 标识符   推荐采用驼峰写法
+   - 注释 //单行    /* 多行 */
+   - use strict  启用严格模式。可添加文件第一行或函数体第一行
+   - 语句 ;结束    建议每个语句有分号(除了以花括号结尾)，不让电脑猜想有没有
+2.2 关键字和保留字
+2.3 变量
+   var a=3;局部变量
+   b=5;  全局变量，不推荐写法
+2.4 数据类型
+   2.4.1 typeof 操作符
+     "undefined"       --- 未定义
+     "boolean"
+     "string"
+     "number"
+     "object"        ---- 对象、数组或null
+     "function"
+   2.4.2 undefined 类型
+	变量未初始化就是undefined,此时变量不能输出。显式初始化为undefined可以输出
+   2.4.3 Null 类型
+	Null 空对象指针
+	undeifned == null    //因为undefined派生自null
+   2.4.4 Boolean 类型
+	Boolean()   此函数将一个值转换来布尔型
+   2.4.5 Number 类型
+	var num1 = 0xA        //十六进制数
+	var num2 = 5e-3       // 0.005
+	- 浮点数值
+	   var f1 = .2        //有效，不推荐
+	   var f2 = 10.0      //解析为整数 10
+	   0.1+0.2 = 0.3000000004    //浮点可能丢失精度
+	- 数值范围
+	   Number.MIN_VALUE  -  Number.MAX_VALUE   
+	   超出就是Infinity 或 -Infinity
+	   isFinite(num)      //检测num是否超出范围
+	- NaN   Not a Number
+	   任何数除 0 就是NaN
+	   NaN!=NaN
+	   isNaN(num)       //判断一值是否是NaN
+	- 数值转换
+	  Number()、parseInt()、parseFloat()
+	  Number("hello")      // null
+	  Number("00011")      // 11
+	  parseInt(35.6abc2)   // 35
+	  parseInt("0xA")      // 10
+	  parseInt("0xA",16)   // 10
+	  parseInt("10",2)     // 2
+   2.4.6 String类型
+	字符串可以由一对"或'包括零或多个16位Unicode字符组成
+	- 字符字面量
+	  \n \t \b 空格 \r 回车 \f 进纸 \\ \' \" 
+	  \xnn  \unnnn  (n为0-F)
+	  \x41 表示"A"
+	- 字符串特点
+	  字符串不可变。改变某个字符串变量，先销毁再用新的字符串填充
+	- 转换为字符串
+	  几乎每个值者有 toString() 方法，包括字符串本身
+	  var num = 10
+	  num.toString()       //"10"
+	  num.toString(2)      //"1010"
+	  null.toString()      //"null"
+	  undefined.toString() //"undefined"
+   2.4.7 Object类型
+	var o = new Object();
+	每个Object实例都有下列属性和方法
+	  - Constractor       构造函数
+	  - hasOwnProperty(propertyName)
+	  - isPrototypeOf(object)         检测传入对象是否是别一对象原型
+	  - propertyIsEnumberable(propertyName) 检测指定属性能否用for-in枚举
+	  - toLocaleString()
+	  - toString()
+	  - valueOf()  返回对象的字符串、数值或布尔表示
+2.5 操作符
+      操作符应用对象时通常会调用toString()或valueOf()方法
+   2.5.1 一元操作符
+	1、递增和递减（++、--）
+	    注意前置和后置的区别
+	2、一元加和减 （+、-）
+	     可以理解为正和负。注意负负得正（-负数）
+   2.5.2 位操作符
+      所有数操作时从64位转为32位，且第32位为符号位 0为正数；1为负数
+      负数二进制存储：负数绝对值二进制码，取反，加一
+      注意：负数.toString(2)；会取反加一。也就是  -(负数绝对值)
+	1、按位非NOT  ~
+	    将操作数所有位0和1互换(包括符号位)。
+	    var m = 25
+	    var n = ~m      // n = -26
+	2、按位与AND  & 
+	    相同位的数同时为1时，结果为1，否则为0
+	    var resule = 25&3;     //1
+	3、按位或OR
+	    相同位的数同时为0时，结果为0，否则为1
+	4、按位异或XOR  ^
+	    相同位的数相同为0，相异为1
+	5、左移   &lt;&lt;
+	    左移会将数值所有位向左移动指定位数，但不影响符号位
+	    var n = 2&lt;&lt;5    // 64
+	6、有符号右移   &gt;&gt;
+	    将数值所有位向右移到（左边移出位以符号位数填充），保留符号位
+	7、无符号右移  &gt;&gt;&gt;
+	    将数值所有位向右移到（左边移出位以0填充），留符号位可能改变
+	    正数右移和无符号右移相同，负数无符号右移数很大
+   2.5.3 布尔操作符
+	1、逻辑非  !
+        2、逻辑与  &&
+	   -- 如果第一个是对象，返回第二个操作数
+	   -- 如果第二个是对象且第一个为true，返回第二个对象
+	   -- 如果有一个操作数是null或NaN或undefined，则返加这个操作数
+	3、逻辑或  ||
+	   -- 如果第一个是对象，返回第一个操作数
+	   -- 如果第二个是对象且第一个为false，返回第二个对象
+	   -- 如果有一个操作数是null或NaN或undefined，则返加这个操作数
+   2.5.4 乘性操作符
+	1、乘法  *
+	   -- 如果有操作数不是数值，则后台调用Number()将其先转为数值
+	2、除法  /
+	3、求模  %
+   2.5.5 加性操作符
+	1、加法  +
+	   -- 如果第一个操作数是字符串，则将第二个转字符串再拼接
+	   -- 如果有操作数是对象、数值或布尔值则先用toString()方法
+	2、减法  -
+	   -- 如果有操作数是字符串、布尔、null或undefined,则先调Number()
+	   -- 如果有一个是对象，则调先用valueOf()
+   2.5.6 关系操作符  &lt; &gt; &lt;= &gt;=	
+	- 如果有一个是数值，执行数值比较。都是字符串，执行对应的字符编码值比较
+	- 如果一个是对萌，执行valueOf()方法转换后比较
+	例：var result = "23"&lt;"3"   //true
+   2.5.7 相等操作符
+	1、相等和不相等 == !=
+	2、全等和不全等 === !==
+   2.5.8 条件操作符
+	variable = boolean_expression?true_value:false_value
+   2.5.9 赋值操作符 =
+	*= /= %= += -= &lt;&lt;= &gt;&gt;= &gt;&gt;&gt;=
+   2.5.10 逗号操作符 ,
+
+2.6 语句
+   2.6.1 if 
+   2.6.2 do-while 
+   2.6.3 while 
+   2.6.4 for 
+   2.6.5 for-in 
+	for(var person in persons){
+		console.log(person);
+	}
+   2.6.6 break 和 contiune
+   2.6.7 witch
+   2.6.8 switch
+
+2.7 函数
+   function fun(id){ .... return;}
+   不能把函数或参数命名为 eval 或 arguments
+   2.7.1 理解函数
+	function所有参数在arguments类数组中，参数可以是任意类型、数量
+	arguments长度由实际传入参数的数量决定
+   2.7.2 函数没有重载
+	同名函数，后面的会覆盖前的函数，不论函数参数是否相同
+
+第3章 变量、作用域和内存
+3.1 基本类型和引用类型的值
+	Undefined、Null、Boolean、Number和String 可以操作实际值
+	引用类型保存在内存中，实际操作对象的引用
+   3.1.1 动态的属性
+	对于引用类型，我们可以添加属性和方法
+   3.1.2 复制变量值
+	基本类型：复制值的副本，两个值完全独立
+	引用类型：复制值的引用，两个引用指向同一值
+   3.1.3 传递参数
+	和复制变量值类似
+   3.1.4 检测类型
+	typeof ：检测基本类型,返回字符串      typeof num
+	instanceof : 检测引用类型，返回布尔值  person instanceof persons
+3.2执行环境和作用域 
+   在web浏览器中,window被认为是全局执行环境
+   每个函数都有自己的执行环境
+   3.2.1 延长作用域链
+	try-catch 中的catch块
+	with语句
+   3.2.2 JavaScript中没有块级作用域
+	1、声明变量  
+	     建议用 var 前置,如果没有就是全局变量
+	2、查询标识符
+	     从当前作用域找，没有就查上一级，直到找到全局环境
+   3.3 垃圾收集
+	为了确保用最少内存获取更好性能。通常执行代码只保存必要的数据
+	一旦数据不用，最好将其值设为null便于垃圾回收
+
+第四章 引用类型
+   4.1 Object
+	创建对象：构造函数     var person = new Object(); 
+		  对象字面量   var person={name:"jack"};
+	访问对象属性：person.name   person[name] 或 person["name"]
+
+   4.2 Array
+	var colors = new Array(20);    //创建长度为20的数组
+	var colors = new Array("red","blue","green");
+	var colors = ["red","blue","green"]
+	var colors = [,"red"]   //不推荐
+	colors[colors.length]="black"          //在数组末尾追加一元素
+
+   4.2.1 检测数组
+	value instanceof Array
+	Array.isArray(value)               //多个全局环境
+   4.2.2 转换方法
+	var colors = ["red","blue","green"]
+	colors.toString()   //返回以逗号分隔的字符串
+	colors.valueOf()    //返回数组对象（的引用）
+	alert(colors.join("||")  //red||blue||green
+   4.2.3 栈方法
+	var colors = new Array();
+	colors.push("red","green")     //在数组后面添加元素 
+	colors.pop()		       //在数组后面删除元素
+	colors.shift()		       //在数组首位删除
+	colors.unshift()	       //在数组首位添加
+   4.2.4 重排序方法
+	var values = [0,1,5,10,15]
+	values.reverse()      // [15,10,5,1,0]  反序
+	values.sort()         // [0,1,10,15,5]  排序  
+	上行达不到想要的效果，可以传入一个比较函数作为参考
+	funtcion compare(value1,value2){
+	    if(value1&lt;value2){
+		return -1;
+	    }else if(value1&gt;value2){
+		return 1;
+	    }else{
+		return 0;
+	    }
+	}
+	values.sort(compare)    // [0,1,5,10,15]
+	可以通过改写传入比较函数，达到我们想要的各种效果
+   4.2.5 操作方法
+	1、concat()  先复制当前数组副本再添加函数参数
+	  var colors = ["red","blue"]
+	  var colors2 = colors.concat("yellow",["black","brown"]);
+	  // colors2 = ["red","blue","yellow","black","brown"]]
+	2、slice()  截取当前数组某一范围成一个新数组（支持负数 length+负数）
+	  var colors2 = colors.slice(1)     // 从下标1到最后
+	  var colors3 = colors.slice(1,4)   // 从1到4，不包含4
+	3、splice()
+	   - 删除 splice(0,2)   0是要删除的位置，2是要删除的项数
+	   - 替换 splice(2,3,"red")  把下标2开始的3个元素换成"red"
+	   - 插入 splice(2,0,"red","green") 把下标2的0个元素前插入"red","green"
+   4.2.6 位置方法  如果没找到返回 -1
+	var nums = [1,2,3,4,5,4,3,2,1]
+	nums.indexOf(4)          // 从前面开始找第一个4的下标   3
+	nums.lastIndexOf(4)	 // 从后面开始找第一个4的下标   5
+   4.2.7 迭代方法   方法本身不会修改数组包含的值
+	every()、some()、filter()、map()、forEach()
+	var nums = [1,2,3,4,5,4,3,2,1]
+	var everyResult = nums.every(function(item,index,array){
+	    return (item&gt;2)
+	})        // false 判断nums所有项是否都&gt;2
+	var someResult = nums.some(function(item,inedx,array){
+	    return (item&gt;2)
+	})        // true 判断nums某些项是否&gt;2
+	var filterResult = nums.filter(function(item,index,array){
+	    return （item&gt;2)
+	})       // [3,4,5,4,3] 返回所有大于2的项的数组
+	var mapResult = nums.map(function(item,index,array){
+	    return item*2
+	})       // [2,4,6,8,10,8,6,4,2]  返回所有项*2的数组
+	nums.forEach(function(item,index,array){
+	    // 执行某些操作
+	}）      //本质上与for循环一样
+   4.2.8 缩小方法
+	reduce()和reduceRight() 接个四个参数：前一个值，当前值，项索引数组对象
+	var values = [1,2,3,4,5]
+	var sum = values.reduce(function(prev,cur,index,array){
+	    return prev + cur
+	})       // sum = 15
+   4.3 Date
+	var now = new Date()  //创建日期 指定毫秒数(1970.1.1开始算毫秒)或空(当前日期)
+	1、Date.Date.parse()
+	   var d = new Date(Date.parse("May 25,2018")
+	   var d = new Date("May 25,2018")
+	   以上两行代码等同，上行会隐式调用Date.pares()
+	2、Date.UTC()    注意：月份从0开始
+	   var d2 = new Date(Date.UTC(2018,0))  // 2018.1
+	   var d3 = new Date(Date.UTC(2018,4,5,17,55,55))  //2018.5.5 17:55:55
+	   var d4 = newDate(2018,0)  // d4本地日期与d2日期一样，同样会隐式调用
+	3、Date.now()    调用这个方法时的日期时间
+	   var start = Date.now()
+	   doSomething()
+	   var end = Date.now()
+	   count = end - start    //取得两时间的差 毫秒单位
+   4.3.1 继承的方法
+	toString()        //返回日期的字符串
+	toLocaleString()  //返回本地日期格式的字符串
+	valueOf()         //将Date对象转换为毫秒数值
+   4.3.2 日期格式化方法
+	- toDateString()
+	- toTimeString()
+	- toLocaleDateString()
+	- toLocaleTimeString()
+	- toUTCString()
+   4.3.3 日期/时间方法
+	- getTime()         //日期毫秒数。与valueOf()值相同
+	- setTime(毫秒)     //将毫秒数值转换为日期
+	- getFullYear()     //返回4位数的年份
+	- setFullYear()
+	- getMonth()        //返回日期中的月份。从0开始
+	- setMonth(月)      
+	- getDate()         //返回日期中的天数(1-31)
+	- setDate(日)
+	- getDay()          //返回日期中的星期几
+	- getHours()	    //返回日期中的小时
+	- setHours(时)
+	- getMinutes()	    //返回日期中的秒
+	- setMinutes(分)    //超过59则增加小时 125是加2小时，分钟是5
+	- getSeconds()
+	- setSeconds(秒)    //超过59则增加对应的分钟
+	- getMilliseconds()
+	- setMilliseconds(毫秒)
+	- getTimezoneOffset() //返回本地时间与UTC时间相差的分钟数
+4.4 RegExp
+   var expression = / pattern / flags;     //创建正则表达式
+   flages: - g   //全局模式
+	   - i   //不区分大小写
+	   - m   //多行模式
+   元字符需转义{、（、[、\、^、$、|、)、?、*、+、.、]、}
+   var pattern1 = /[bc]at/i    //匹配第一个bat或cat，不区分大小写
+   var pattenr2 = new RegExp("[bc]at","i");    //与上一行等价
+   pattern1.test("CAt");        //true
+   pattern1.test("aat");        //false
+	</pre>
+</body>
+</html>
+
+
+

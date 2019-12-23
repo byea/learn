@@ -1,0 +1,35 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML5</title>
+</head>
+<body>
+	<pre> 	
+
+win10 FJHWT-KDGHY-K2384-93CT7-323RC
+NVM工具的使用
+安装步骤
+  1、下载：nvm-windows
+  2、解压到一个全英文路径
+  3、编辑解压目录下的settings.txt文件（不存在就新建）
+    - root 配置为当前 nvm.exe 所在目录
+    - path 配置为 node 快捷方式所在目录
+    - arch 配置为当前操作系统的位数(32/64)
+    - proxy 可以不用配置
+ root:C:\develop\nvm
+ path:C:\develop\nodejs
+ arc:64
+ proxy:
+  4、配置环境变量
+    - NVM_HOME = 当前 nvm.exe 所在目录
+    - NVM_SYMLINK = node 快捷方式所在的目录
+    - PATH += %NVM_HOME%;%NVM_SYMLINK%;
+    把几个版本的node解压文件放到C:\develop\nvm中，并改文件夹名为v11.9.0、v10.15.1
+    nvm use 11.9.0           使用11.9.0版本node
+  5、NPM的目录之后再配置
+  
+   如果有多个node版本，设置npm路径：$ npm  config set prefix c:\Develop\nvm\npm
+	</pre>
+</body>
+</html>
